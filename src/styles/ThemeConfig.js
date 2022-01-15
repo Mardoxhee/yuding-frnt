@@ -13,7 +13,10 @@ const theme = createTheme({
      white:'#FFFFFF',
      categoryNumber:"#F0F0F0",
      categoryNumberFontColor:"#787878",
-     categoryBcg : "#FAFAFA"
+     categoryBcg : "#FAFAFA",
+     offers:'#FCFCFC',
+     cardBorder:"#B7B7B7",
+     mobilebcg:"#F9F9F9"
 
     } ,
     
@@ -21,7 +24,11 @@ const theme = createTheme({
 
   img:{
     images:{
-      backgroundHome:"/Assets/bg.jpg"
+      backgroundHome:"/Assets/bg.jpg",
+      cardBackground:"/Assets/japan.jpg",
+      banner:"/Assets/smiley.jpg",
+      largeCard:"/Assets/rotana.jpg",
+      banner2:"/Assets/banner2.jpg"
     }
   }
 });

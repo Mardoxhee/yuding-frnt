@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
-import GlobalStyles from './../src/styleConfig/GlobalStyle'
+import GlobalStyles from './../src/styles/GlobalStyle'
 import Layout from "./../src/components/Layouts/Layout";
-import theme from './../src/styleConfig/ThemeConfig'
+import theme from './../src/styles/ThemeConfig'
 
 
 

@@ -14,7 +14,7 @@ color:${({theme})=>theme.palette.colors.white};
 h1{
   font-weight: 600;
 font-size: 55px;
-line-height: 82p
+line-height: 82px;
 }
 span{
   font-size: 24px;
@@ -24,6 +24,21 @@ width: 720px;
 font-weight: normal;
 margin-bottom:50px;
 }
+@media only screen and (max-width: 799px) {
+
+width:100% !important;  
+h1{
+  margin-top:20px;
+  width:100%;
+  font-size: 55px;
+  text-align:center;
+  line-height:65px;
+}
+span{
+  width:80%;
+}
+}
+
 
 
 

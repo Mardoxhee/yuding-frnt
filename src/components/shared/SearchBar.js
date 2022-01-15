@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { Icon } from '@iconify/react';
 
 
 const Contenair = styled.div`
@@ -45,6 +45,9 @@ const Contenair = styled.div`
     display:flex;
     justify-content:center;
     button{
+      .icone{
+        display:none;
+      }
       background-color:${({theme})=>theme.palette.colors.main};
       border:none;
       font-size:1.3rem;
@@ -56,6 +59,53 @@ const Contenair = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 799px) {
+
+height:60px;
+width:80%;
+justify-content:space-between;
+input{
+  width:70%;
+  border:none;
+  font-size:1rem;
+} 
+
+select{
+display:none;
+}
+div{
+  display:flex;
+  justify-content:center;
+  height:100%;
+  padding:0px;
+  align-items:center;
+  border-radius: 0px 10px 10px 0px ;
+  width:20%;
+  button{
+    padding:10px 10px;
+    height:100%;
+    width:100%;
+    border-radius:0px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius: 0px 10px 10px 0px ;
+    
+    font-size:2.5rem;
+  .icone{
+    display:block;
+    font-weight:800;
+    
+  }
+  small{
+    display:none;
+  }
+}
+}
+
+
+}
 `
 
 const SearchBar = ()=>{
@@ -69,7 +119,7 @@ const SearchBar = ()=>{
         <option value="" >pizza</option>
       </select>
       <div>
-        <button>Rechercher</button>
+        <button><small>Rechercher</small> <Icon icon="bx:bx-search"className="icone" /></button>
       </div>
     </Contenair>
   )
