@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import ControlledCheckbox from '../shared/Checkbox';
 import Link from 'next/link';
+import Box from '@mui/material/Box';
 
 const Contenair = styled.div`
   width: 100%;
@@ -85,6 +85,12 @@ const Contenair = styled.div`
       }
       span {
         color: #f7941d;
+      }
+      .check {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        background-color: #f7941d;
       }
     }
     button {
@@ -180,19 +186,21 @@ const FormSide = () => {
             </div>
           </span>
         </div>
-        <form>
+        <Box component="form">
           <div>
             <TextField
               id="outlined-basic"
               label="Votre nom"
               variant="outlined"
               className="textfield"
+              type="text"
             />
             <TextField
               id="outlined-basic"
               label="Votre prénom"
               variant="outlined"
               className="textfield"
+              type="text"
             />
           </div>
           <TextField
@@ -207,6 +215,7 @@ const FormSide = () => {
             label="votre numéro de téléphone"
             variant="outlined"
             className="textfield-phone"
+            type="tel"
           />
           <div className="passwordFieldsContenair">
             <TextField
@@ -225,14 +234,15 @@ const FormSide = () => {
             />
           </div>
           <div className="checkboxContenair">
-            <ControlledCheckbox />
+            {/* <ControlledCheckbox /> */}
+            <input type="checkbox" className="check" />
             <p>
               Je souhaite créer un compte Yuding restaurateur et j'accepte
               <span> les conditions d'utilisation</span>
             </p>
           </div>
           <button>Créer mon compte</button>
-        </form>
+        </Box>
       </div>
       <div className="rightSide">
         <div className="notice">

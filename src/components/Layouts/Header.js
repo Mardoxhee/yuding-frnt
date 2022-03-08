@@ -4,8 +4,15 @@ import Image from 'next/image';
 import yudingLogo from './../../../public/Assets/logo/logoyuding.png';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export const HeaderStyled = styled.header`
+  .active {
+    color: ${({ theme }) => theme.palette.colors.main};
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+  }
+  transition: all 0.3s ease-in-out;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -76,6 +83,7 @@ export const Logo = styled.div`
 `;
 
 const Header = () => {
+  const router = useRouter();
   // const [icone, setIcone] = useState(false);
   const [click, setClick] = useState(false);
   const handleClick = () => {
@@ -92,22 +100,22 @@ const Header = () => {
       </Link>
       <Nav>
         <Menu>
-          <li>
+          <li className={router.pathname == '/' ? 'active' : ''}>
             <Link href="/">
               <a>Accueil</a>
             </Link>
           </li>
-          <li>
+          <li className={router.pathname == '/Explorer' ? 'active' : ''}>
             <Link href="/Explorer">
               <a>Explorer</a>
             </Link>
           </li>
-          <li>
+          <li className={router.pathname == '/Blog' ? 'active' : ''}>
             <Link href="/Blog">
               <a>Blog</a>
             </Link>
           </li>
-          <li>
+          <li className={router.pathname == '/A propos' ? 'active' : ''}>
             <Link href="/A propos">
               <a>A propos</a>
             </Link>

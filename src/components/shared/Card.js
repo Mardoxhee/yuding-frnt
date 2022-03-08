@@ -35,7 +35,7 @@ const Contenair = styled.div`
         rgba(6, 10, 11, 0.6842087176667542) 0%,
         rgba(0, 0, 0, 0) 54%
       ),
-      url(${({ theme }) => theme.img.images.cardBackground});
+      url('${({ image }) => image}');
     background-size: cover;
     padding: 10px;
     @media only screen and (max-width: 799px) {
@@ -73,9 +73,9 @@ const Contenair = styled.div`
   }
 `;
 
-const Card = ({ category, reduction, title, openStatus, adress }) => {
+const Card = ({ category, reduction, title, openStatus, adress, image }) => {
   return (
-    <Contenair>
+    <Contenair image={image}>
       <div className="mainCard">
         <div className="upSide">
           <h4>{category}</h4>

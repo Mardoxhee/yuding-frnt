@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Title from './../shared/Title';
 import Card from './../shared/Card';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useGetRestaurantsQuery } from '../../../services/restaurants';
 
 const Contenair = styled.section`
@@ -10,6 +11,15 @@ const Contenair = styled.section`
   padding: 40px 100px;
   display: flex;
   flex-direction: column;
+  .more {
+    text-align: right !important;
+    margin-top: 10px;
+    color: ${({ theme }) => theme.palette.colors.main};
+    font-size: 0.9rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   a {
     text-decoration: none;
   }
@@ -50,16 +60,17 @@ const Popular = () => {
         subtitle="Les resturants les plus fréquentés de la ville de la ville de Kinshasa "
       />
       <CardContenair>
-        {isLoading && 'Loading...'}
+        {isLoading && 'loading...'}
         {isError && error.message}
         {isSuccess &&
           data &&
           data.data.restaurants.map((restaurant, i) => {
             console.log(data.restaurants);
             return (
-              <Link href={'/:id'}>
+              <Link href={'/${id}'}>
                 <a>
                   <Card
+                    image={restaurant.image}
                     category={restaurant.category}
                     reduction="50"
                     title={restaurant.restaurantName}
@@ -71,6 +82,11 @@ const Popular = () => {
             );
           })}
       </CardContenair>
+      <span className="more">
+        <Link href="/Explorer">
+          <a>Voir plus</a>
+        </Link>
+      </span>
     </Contenair>
   );
 };

@@ -4,9 +4,5 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function CheckboxLabels({ label }) {
-  return (
-    <FormGroup>
-      <FormControlLabel control={<Checkbox />} label={label} />
-    </FormGroup>
-  );
+  return <FormControlLabel control={<Checkbox />} label={label} />;
 }

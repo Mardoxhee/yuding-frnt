@@ -114,7 +114,9 @@ const BestOffers = () => {
         </Link>
       </CardContenair>
       <span className="more">
-        <a>Voir plus</a>
+        <Link href="/Explorer">
+          <a>Voir plus</a>
+        </Link>
       </span>
     </Contenair>
   );
