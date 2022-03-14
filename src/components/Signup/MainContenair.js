@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import HorizontalLinearStepper from './Form';
+import Form from './Form';
 import ImgSidetenair from './ImgSide';
+
 const Contenair = styled.section`
   width: 100%;
   height: 100vh;
@@ -19,7 +20,7 @@ const Auth = () => {
     <Contenair>
       <ImgSidetenair />
       <div className="formSide">
-        <HorizontalLinearStepper />
+        <Form />
       </div>
     </Contenair>
   );

@@ -65,13 +65,17 @@ const Form = () => {
   return (
     <FormContenair>
       <div className="imgContenair">
-        <Image
-          src="/Assets/logo/Logo.png"
-          alt="logoYuding"
-          width="200px"
-          height="80px"
-          className="logoContent"
-        />
+        <Link href="/">
+          <a>
+            <Image
+              src="/Assets/logo/Logo.png"
+              alt="logoYuding"
+              width="200px"
+              height="80px"
+              className="logoContent"
+            />
+          </a>
+        </Link>
       </div>
 
       <form>

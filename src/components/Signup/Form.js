@@ -165,7 +165,7 @@ const FormSide = () => {
     <Contenair>
       <div className="formContenair">
         <h2>Vous allez créer votre compte yuding Restaurateur</h2>
-        <div class="advice">
+        <div className="advice">
           <span>
             <Icon icon="grommet-icons:validate" className="icone" />{' '}
             <p>Publication gratuite de votre restaurant sur Yuding</p>

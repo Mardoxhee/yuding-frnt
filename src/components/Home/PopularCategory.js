@@ -4,6 +4,7 @@ import Card from './../shared/Card';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useGetRestaurantsQuery } from '../../../services/restaurants';
+import Squeleton from './../shared/Squeleton';
 
 const Contenair = styled.section`
   width: 100%;
@@ -60,7 +61,7 @@ const Popular = () => {
         subtitle="Les resturants les plus fréquentés de la ville de la ville de Kinshasa "
       />
       <CardContenair>
-        {isLoading && 'loading...'}
+        {isLoading && <Squeleton />}
         {isError && error.message}
         {isSuccess &&
           data &&

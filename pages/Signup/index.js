@@ -13,7 +13,6 @@ const Signup = () => {
   return (
     <MainContenair>
       <Auth />
-      {/* <div>irefirfh</div> */}
     </MainContenair>
   );
 };
