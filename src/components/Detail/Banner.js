@@ -69,7 +69,7 @@ const Contenair = styled.section`
   }
 `;
 
-const Banner = () => {
+const Banner = ({ details }) => {
   return (
     <Contenair>
       <div className="mainContenair">
@@ -81,10 +81,10 @@ const Banner = () => {
           </div>
         </div>
         <div className="bottomSide">
-          <h2>ROTANA</h2>
+          <h2>{details.restaurantName}</h2>
           <div className="details">
-            <p>Congolaise-</p>
-            <p>32 Socimat Kinshasa Ngaliema</p>
+            <p>{details.pays}-</p>
+            <p>{details.adress}</p>
             <a>Voir sur la carte</a>
           </div>
         </div>

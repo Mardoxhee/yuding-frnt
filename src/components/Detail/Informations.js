@@ -56,12 +56,12 @@ const MainContenair = styled.section`
   }
 `;
 
-const MainBody = () => {
+const MainBody = ({ details }) => {
   return (
     <>
       <MainContenair>
         <div className="informations">
-          <BasicTabs />
+          <BasicTabs details={details} />
         </div>
         <div className="reservationForm">
           <ReservationForm />

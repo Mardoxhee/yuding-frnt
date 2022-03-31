@@ -246,7 +246,11 @@ const FormSide = () => {
       </div>
       <div className="rightSide">
         <div className="notice">
-          <h4>Vous n'êtes pas restaurateur ?</h4>
+          <Link href="/Explorer">
+            <a>
+              <h4>Vous n'êtes pas restaurateur ?</h4>
+            </a>
+          </Link>
           <p>
             Cette page est destinée uniquement aux restaurateurs. Si vous voulez explorer,
             rechercher ou vous souhaitez reserver un restaurant, <a>cliquez-ici</a>

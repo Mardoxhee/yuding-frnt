@@ -12,6 +12,7 @@ const Contenair = styled.section`
   padding: 40px 100px;
   display: flex;
   flex-direction: column;
+
   .more {
     text-align: right !important;
     margin-top: 10px;
@@ -64,15 +65,14 @@ const Popular = () => {
         {isLoading && <Squeleton />}
         {isError && error.message}
         {isSuccess &&
-          data &&
-          data.data.restaurants.map((restaurant, i) => {
-            console.log(data.restaurants);
+          data.restaurants.map((restaurant) => {
             return (
-              <Link href={'/${id}'}>
+              <Link href={'./' + restaurant._id} key={restaurant._id}>
                 <a>
                   <Card
+                    key={restaurant.id}
                     image={restaurant.image}
-                    category={restaurant.category}
+                    category={restaurant.category ? restaurant.category.categoryName : 'classic'}
                     reduction="50"
                     title={restaurant.restaurantName}
                     openStatus="fermé"

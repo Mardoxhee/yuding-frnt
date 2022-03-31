@@ -2,20 +2,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields({ label }) {
   return (
-    <Box
-      component="div"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' }
-      }}
-      noValidate
-      autoComplete="off">
+    <Box component="div" noValidate autoComplete="off">
       <div>
         <TextField
           className="textfield"
           id="outlined-number"
-          label="Number"
+          label={label}
           type="number"
           InputLabelProps={{
             shrink: true

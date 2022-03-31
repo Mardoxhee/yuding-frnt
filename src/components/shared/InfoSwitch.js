@@ -38,7 +38,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({ details }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,18 +55,10 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <p>
-          Mei at intellegat reprehendunt, te facilisis definiebas dissentiunt usu. Choro delicata
-          voluptatum cu vix. Sea error splendide at. Te sed facilisi persequeris definitiones, ad
-          per scriptorem instructior, vim latine adipiscing no. Cu tacimates salutandi his, mel te
-          dicant quodsi aperiri. Unum timeam his eu. An malorum ornatus nostrum vel, graece
-          iracundia laboramus cu ius. No pro mazim blandit instructior, sumo voluptaria has et, vide
-          persecuti abhorreant ne est.
-          <Menu />
-        </p>
+        <Menu />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        INFORMATIONS
+        <p>{details.description}</p>
       </TabPanel>
       <TabPanel value={value} index={2}>
         AVIS

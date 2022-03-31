@@ -11,8 +11,7 @@ const Squeleton = ({
   ...props
 }) => {
   const list = [];
-
-  let height;
+  let height = 0;
 
   for (let i = 1; i <= row; i++) {
     const itemWidth = (width - padding * (column + 1)) / column;

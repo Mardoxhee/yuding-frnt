@@ -19,10 +19,10 @@ const Contenair = styled.div`
     .textSide {
       .country,
       .adress {
-        font-size: 0.7rem;
+        font-size: 0.5rem;
       }
       h3 {
-        font-size: 0.5rem;
+        font-size: 0.7rem !important;
       }
       div {
         display: flex;
@@ -88,7 +88,7 @@ const LargeCard = ({ country, restaurantName, adress, reduction, price }) => {
         <span className="adress">{adress}</span>
         <div>
           <p className="reduction">-{reduction}</p>
-          <p>Prix moyen {price}$</p>
+          <p>Prix moyen : {price}$</p>
         </div>
       </div>
     </Contenair>

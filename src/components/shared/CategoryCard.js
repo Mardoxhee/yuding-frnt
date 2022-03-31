@@ -41,14 +41,14 @@ const Contenair = styled.div`
   }
 `;
 
-const CategoryCard = ({ title, price }) => {
+const CategoryCard = ({ title, price, icon, val }) => {
   return (
     <Contenair>
       <div className="NbrContenair">
-        <CategoryNumber value={69} />
+        <CategoryNumber value={val} />
       </div>
       <div className="IcnoneContenair">
-        <Icon icon="fluent:food-pizza-24-regular" className="icone" />
+        <Icon icon={icon} className="icone" />
       </div>
       <div>
         <h3>{title}</h3>

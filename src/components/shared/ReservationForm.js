@@ -71,15 +71,15 @@ const Contenair = styled.div`
       box-sizing: border-box !important;
       width: 100%;
       padding: 10px 20px;
-      .textfield {
-        width: 228px;
-      }
+
       h4 {
         font-size: 0.8rem;
       }
     }
+
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-weight: 400;
     padding: 10px;
     background-color: #f8f8f8;

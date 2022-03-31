@@ -46,9 +46,6 @@ const Menu = () => {
       <p>
         Lorem ipsum dolor sit amet, consectetur adipis Lorem ipsum dolor sit amet, consectetur
         adipisLorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consectetur
-        adipisLorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consectetur
-        adipisLorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consectetur
-        adipisLorem
       </p>
       <div className="entreeMealContenair">
         <MealCard

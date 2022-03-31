@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
     case 'Signup':
     case 'Login':
     case 'Resetpassword':
+    case 'CreationRestaurant':
       return <Component {...pageProps} />;
     default:
       return (
