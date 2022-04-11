@@ -1,10 +1,9 @@
-import styled from 'styled-components';
-import Title from './../shared/Title';
-import Card from './../shared/Card';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useGetRestaurantsQuery } from '../../../services/restaurants';
-import Squeleton from './../shared/Squeleton';
+import styled from "styled-components";
+import Title from "./../shared/Title";
+import Card from "./../shared/Card";
+import Link from "next/link";
+import Image from "next/image";
+import { useGetRestaurantsQuery } from "../../../services/restaurants";
 
 const Contenair = styled.section`
   width: 100%;
@@ -37,14 +36,9 @@ const CardContenair = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-
-  div {
-    font-size: 1rem;
-    display: flex;
-  }
+  align-items: flex-start !important;
+  justify-content: space-between;
 
   @media only screen and (max-width: 799px) {
     display: flex;
@@ -54,7 +48,8 @@ const CardContenair = styled.div`
 `;
 
 const Popular = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetRestaurantsQuery();
+  const { data, error, isLoading, isSuccess, isError } =
+    useGetRestaurantsQuery();
   return (
     <Contenair>
       <Title
@@ -62,17 +57,21 @@ const Popular = () => {
         subtitle="Les resturants les plus fréquentés de la ville de la ville de Kinshasa "
       />
       <CardContenair>
-        {isLoading && <Squeleton />}
+        {isLoading && "loading..."}
         {isError && error.message}
         {isSuccess &&
           data.restaurants.map((restaurant) => {
             return (
-              <Link href={'./' + restaurant._id} key={restaurant._id}>
+              <Link href={"./" + restaurant._id} key={restaurant._id}>
                 <a>
                   <Card
                     key={restaurant.id}
                     image={restaurant.image}
-                    category={restaurant.category ? restaurant.category.categoryName : 'classic'}
+                    category={
+                      restaurant.category
+                        ? restaurant.category.categoryName
+                        : "classic"
+                    }
                     reduction="50"
                     title={restaurant.restaurantName}
                     openStatus="fermé"

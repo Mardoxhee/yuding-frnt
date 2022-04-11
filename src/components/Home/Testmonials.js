@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import Title from './../shared/Title';
-import { CardContenair } from './BestOffers';
-import TestmoniCard from '../shared/TestmoniCard';
-import { useGetTemoignagesQuery } from './../../../services/restaurants';
+import styled from "styled-components";
+import Title from "./../shared/Title";
+import { CardContenair } from "./BestOffers";
+import TestmoniCard from "../shared/TestmoniCard";
+import { useGetTemoignagesQuery } from "./../../../services/restaurants";
 
 const Contenair = styled.section`
   padding: 40px 100px;
@@ -22,7 +22,8 @@ const Contenair = styled.section`
 `;
 
 const Testmonials = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetTemoignagesQuery();
+  const { data, error, isLoading, isSuccess, isError } =
+    useGetTemoignagesQuery();
   return (
     <Contenair>
       <Title
@@ -30,7 +31,7 @@ const Testmonials = () => {
         subtitle="Les avis ne peuvent être faits que par les convives qui ont mangé dans ce restaurant en passant par la plateforme Yuding "
       />
       <CardContenair className="cardContenair">
-        {isLoading && 'loading...'}
+        {isLoading && "loading..."}
         {isError && error.message}
         {isSuccess &&
           data.temoignages.slice(0, 3).map((temoignage) => {

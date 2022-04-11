@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import BasicTabs from '../shared/InfoSwitch';
-import ReservationForm from './../shared/ReservationForm';
-import BasicModal from './../../components/shared/Modal';
+import styled from "styled-components";
+import BasicTabs from "../shared/InfoSwitch";
+import ReservationForm from "./../shared/ReservationForm";
+import BasicModal from "./../../components/shared/Modal";
 
 const MainContenair = styled.section`
   @media only screen and (max-width: 799px) {

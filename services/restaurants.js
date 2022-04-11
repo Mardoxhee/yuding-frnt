@@ -1,29 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const restaurantsApi = createApi({
-  reducerPath: 'restaurants',
+  reducerPath: "restaurants",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://127.0.0.1:3000'
+    baseUrl: "http://127.0.0.1:3000",
   }),
   endpoints: (builder) => ({
     getRestaurants: builder.query({
-      query: () => `restaurants`
+      query: () => `restaurants`,
     }),
     getRestaurantsDetails: builder.query({
-      query: ({ id }) => `/restaurants/${id}`
+      query: ({ id }) => `/restaurants/${id}`,
     }),
     getRecomandedRestaurants: builder.query({
-      query: () => `restaurants?isRecommanded=true`
+      query: () => `restaurants?isRecommanded=true`,
     }),
     getTemoignages: builder.query({
-      query: () => `temoignages`
-    })
-  })
+      query: () => `temoignages`,
+    }),
+  }),
 });
 
 export const {
   useGetRestaurantsQuery,
   useGetRecomandedRestaurantsQuery,
   useGetRestaurantsDetailsQuery,
-  useGetTemoignagesQuery
+  useGetTemoignagesQuery,
 } = restaurantsApi;

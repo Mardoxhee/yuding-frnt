@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import SoulignBar from './../shared/SoulignBar';
-import Caroussel from './Caroussel';
+import styled from "styled-components";
+import SoulignBar from "./../shared/SoulignBar";
+import Caroussel from "./Caroussel";
 
 const Contenair = styled.section`
   width: 100%;

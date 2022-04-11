@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Contenair = styled.section`
   @media only screen and (max-width: 799px) {

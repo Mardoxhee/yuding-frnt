@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import Link from 'next/link';
-import Image from 'next/image';
-import yudingLogo from './../../../public/Assets/logo/logoyuding.png';
-import { Icon } from '@iconify/react';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import styled from "styled-components";
+import Link from "next/link";
+import Image from "next/image";
+import yudingLogo from "./../../../public/Assets/logo/logoyuding.png";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export const HeaderStyled = styled.header`
   .active {
@@ -100,22 +100,22 @@ const Header = () => {
       </Link>
       <Nav>
         <Menu>
-          <li className={router.pathname == '/' ? 'active' : ''}>
+          <li className={router.pathname == "/" ? "active" : ""}>
             <Link href="/">
               <a>Accueil</a>
             </Link>
           </li>
-          <li className={router.pathname == '/Explorer' ? 'active' : ''}>
+          <li className={router.pathname == "/Explorer" ? "active" : ""}>
             <Link href="/Explorer">
               <a>Explorer</a>
             </Link>
           </li>
-          <li className={router.pathname == '/Blog' ? 'active' : ''}>
+          <li className={router.pathname == "/Blog" ? "active" : ""}>
             <Link href="/Blog">
               <a>Blog</a>
             </Link>
           </li>
-          <li className={router.pathname == '/A propos' ? 'active' : ''}>
+          <li className={router.pathname == "/A propos" ? "active" : ""}>
             <Link href="/A propos">
               <a>A propos</a>
             </Link>

@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import Title from './../shared/Title';
-import Card from './../shared/LargeCard';
-import Link from 'next/link';
-import { useGetRecomandedRestaurantsQuery } from './../../../services/restaurants';
-import { useState, useEffect } from 'react';
+import styled from "styled-components";
+import Title from "./../shared/Title";
+import Card from "./../shared/LargeCard";
+import Link from "next/link";
+import { useGetRecomandedRestaurantsQuery } from "./../../../services/restaurants";
+import { useState, useEffect } from "react";
 
 const Contenair = styled.section`
   padding: 40px 100px;
@@ -41,7 +41,8 @@ export const CardContenair = styled.div`
 `;
 
 const BestOffers = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetRecomandedRestaurantsQuery();
+  const { data, error, isLoading, isSuccess, isError } =
+    useGetRecomandedRestaurantsQuery();
   return (
     <Contenair>
       <Title
@@ -49,12 +50,12 @@ const BestOffers = () => {
         subtitle="Les restaurants les mieux cotés par la communuaté Yuding "
       />
       <CardContenair>
-        {isLoading && 'loading...'}
+        {isLoading && "loading..."}
         {isError && error.message}
         {isSuccess &&
           data.restaurants.slice(0, 6).map((restaurant) => {
             return (
-              <Link href={'./' + restaurant._id} key={restaurant._id}>
+              <Link href={"./" + restaurant._id} key={restaurant._id}>
                 <a>
                   <Card
                     country={restaurant.pays}

@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
-import StaticDatePickerLandscape from './DatePicker';
-import MaterialUIPickers from './TimePicker';
-import FormPropsTextFields from './NumberPicker';
-import { Icon } from '@iconify/react';
+import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import StaticDatePickerLandscape from "./DatePicker";
+import MaterialUIPickers from "./TimePicker";
+import FormPropsTextFields from "./NumberPicker";
+import { Icon } from "@iconify/react";
 
 const Contenair = styled.div`
   @media only screen and (max-width: 799px) {
@@ -133,13 +133,17 @@ const ReservationForm = ({ handleClose }) => {
   useEffect(() => {
     fixForm();
 
-    window.addEventListener('scroll', fixForm);
+    window.addEventListener("scroll", fixForm);
   });
   return (
-    <Contenair className={form ? 'formScroll' : ' nothing'}>
+    <Contenair className={form ? "formScroll" : " nothing"}>
       <div className="title">
         <h2>Réservez votre table</h2>
-        <Icon icon="emojione-v1:cross-mark" className="icone" onClick={handleClose} />
+        <Icon
+          icon="emojione-v1:cross-mark"
+          className="icone"
+          onClick={handleClose}
+        />
       </div>
 
       <div className="calenderContenair">
