@@ -1,18 +1,10 @@
-import LoadingButton from '@mui/lab/LoadingButton';
-import * as React from 'react';
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
+import * as React from "react";
 
-export default function LoadingButtonField({ action }) {
-  const [loading, setLoading] = React.useState(false);
-  function handleClick() {
-    setLoading(true);
-  }
+export default function LoadingButtonField({ action, type, loading, onClick }) {
   return (
-    <LoadingButton
-      onClick={handleClick}
-      //   endIcon={<SendIcon />}
-      loading={loading}
-      loadingPosition="end"
-      variant="contained">
+    <LoadingButton variant="contained" type={type} onClick={onClick}>
       {action}
     </LoadingButton>
   );

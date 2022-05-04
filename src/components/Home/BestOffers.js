@@ -3,7 +3,6 @@ import Title from "./../shared/Title";
 import Card from "./../shared/LargeCard";
 import Link from "next/link";
 import { useGetRecomandedRestaurantsQuery } from "./../../../services/restaurants";
-import { useState, useEffect } from "react";
 
 const Contenair = styled.section`
   padding: 40px 100px;

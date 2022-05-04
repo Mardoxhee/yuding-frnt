@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import ImgContenair from './../../src/components/Login/ImgSide';
-import Form from './../../src/components/Login/Form';
+import styled from "styled-components";
+import ImgContenair from "./../../src/components/Login/ImgSide";
+import Form from "./../../src/components/Login/Form";
 
 const MainContenair = styled.section`
   width: 100%;

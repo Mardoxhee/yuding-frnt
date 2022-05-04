@@ -21,20 +21,20 @@ const Carousel = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const url = "https://yuding.herokuapp.com/category";
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      setData(json);
+      setIsLoading(false);
+    } catch (err) {
+      setError(err.message);
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const url = "http://127.0.0.1:3000/category";
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        setData(json);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err.message);
-        console.log(error);
-        setIsLoading(false);
-      }
-    };
     fetchData();
   }, []);
   if (isLoading) {
@@ -62,21 +62,6 @@ const Carousel = () => {
       autoPlay="true"
       autoPlayInterval="2000"
     />
-    // {isLoading && 'Loading...'}
-    // {isError && error.message}
-
-    // {isSuccess &&
-    //   data.categories.map((category) => {
-    //     console.log(data.categories);
-    //     return (
-    //       <CategoryCard
-    //         title={category.categoryName}
-    //         price="30"
-    //         icon={category.categoryICone}
-    //         Key={category.id}
-    //       />
-    //     );
-    //   })}
   );
 };
 export default Carousel;

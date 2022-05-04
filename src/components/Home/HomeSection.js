@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import SearchBar from './../shared/SearchBar';
+import styled from "styled-components";
+import SearchBar from "./../shared/SearchBar";
 
 export const Contenair = styled.section`
   width: 100%;
@@ -49,7 +49,9 @@ const HomeSection = () => {
     <>
       <Contenair>
         <h1>Explorer et Réserver</h1>
-        <span>Les meilleurs restaurants de la ville de Kinshasa aux meilleurs prix</span>
+        <span>
+          Les meilleurs restaurants de la ville de Kinshasa aux meilleurs prix
+        </span>
         <SearchBar />
       </Contenair>
     </>

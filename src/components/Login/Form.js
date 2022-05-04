@@ -1,9 +1,11 @@
-import styled from 'styled-components';
-import Image from 'next/image';
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import LoadingButton from './../../components/shared/LoadingButton';
-import Link from 'next/link';
+import styled from "styled-components";
+import Image from "next/image";
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import LoadingButton from "./../../components/shared/LoadingButton";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import Router from "next/router";
 
 const FormContenair = styled.section`
   width: 50%;
@@ -62,6 +64,54 @@ const FormContenair = styled.section`
 `;
 
 const Form = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    try {
+      const requestoptions = {
+        method: "POST",
+        body: JSON.stringify(data),
+        // credentials: "include",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      };
+      const response = await fetch(
+        "https://yuding.herokuapp.com/accounts/login",
+        requestoptions
+      );
+
+      const jsonData = await response.json();
+      console.log(jsonData.status);
+      console.log(jsonData.token);
+      if (jsonData.token) {
+        localStorage.setItem("user", JSON.stringify(jsonData.token));
+      }
+
+      if (response.status == 200) {
+        Router.push({
+          pathname: "http://localhost:8081/Login",
+        });
+      }
+      reset();
+      //   setSuccess(true);
+      //   console.log({ success });
+      //   setGgetOpened(true);
+      //   reset();
+      // } else {
+      //   setSuccess(false);
+      // }
+    } catch (error) {
+      console.log("error :", error.message);
+    }
+  };
+
   return (
     <FormContenair>
       <div className="imgContenair">
@@ -78,19 +128,29 @@ const Form = () => {
         </Link>
       </div>
 
-      <form>
-        <TextField id="outlined-basic" label="Votre nom" variant="outlined" className="textfield" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          label="Votre adresse mail"
+          variant="outlined"
+          className="textfield"
+          {...register("email", { required: true })}
+        />
         <TextField
           id="password"
-          label="Créer un mot de passe"
+          label="Votre mot de passe"
           variant="outlined"
           type="password"
           className="textfield-pass-word"
+          {...register("password", { required: true })}
         />
         <Link href="Resetpassword">
           <a className="passwordforgotten">(mot de passe oublié ?)</a>
         </Link>
-        <LoadingButton className="buttonConnexion" action="se connecter" />
+        <LoadingButton
+          className="buttonConnexion"
+          action="se connecter"
+          type="submit"
+        />
         <p>
           Pas encore inscrit ?
           <Link href="Signup">

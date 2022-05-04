@@ -1,21 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import TextField from "@mui/material/TextField";
 
-export default function FormPropsTextFields({ label }) {
+export default function FormPropsTextFields({
+  label,
+  onChange,
+  num,
+  className,
+}) {
   return (
-    <Box component="div" noValidate autoComplete="off">
-      <div>
-        <TextField
-          className="textfield"
-          id="outlined-number"
-          label={label}
-          type="number"
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-      </div>
-    </Box>
+    <TextField
+      onChange={onChange}
+      className={className ? className : "textfield"}
+      id="outlined-number"
+      label={label}
+      type="number"
+      value={num}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
   );
 }

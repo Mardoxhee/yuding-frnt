@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Contenair = styled.div`
   width: 300px;
@@ -35,7 +35,7 @@ const Contenair = styled.div`
         rgba(6, 10, 11, 0.6842087176667542) 0%,
         rgba(0, 0, 0, 0) 54%
       ),
-      url('${({ image }) => image}');
+      url("${({ image }) => image}");
     background-size: cover;
     padding: 10px;
     @media only screen and (max-width: 799px) {

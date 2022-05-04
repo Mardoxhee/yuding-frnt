@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import Link from 'next/link';
-import { Icon } from '@iconify/react';
+import styled from "styled-components";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 const Menu = styled.ul`
   display: flex;
@@ -25,7 +25,7 @@ const Contenair = styled.footer`
   }
   padding: 40px 100px;
   width: 100%;
-  height: 50vh;
+  height: auto;
   background-color: ${({ theme }) => theme.palette.colors.black};
   .upSide {
     @media only screen and (max-width: 799px) {

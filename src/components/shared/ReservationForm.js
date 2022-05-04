@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import StaticDatePickerLandscape from "./DatePicker";
 import MaterialUIPickers from "./TimePicker";
 import FormPropsTextFields from "./NumberPicker";
+import CalendarPicker from "@mui/lab/CalendarPicker";
 import { Icon } from "@iconify/react";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import BasicModal from "./../shared/FormModal";
+import Moment from "moment";
+import * as yup from "yup";
+import { reservationSchema } from "./../validations/reservationValidation";
 
-const Contenair = styled.div`
+const Contenair = styled.form`
   @media only screen and (max-width: 799px) {
     margin-top: 2px;
     width: 100%;
@@ -15,6 +21,7 @@ const Contenair = styled.div`
   background-color: #ffffff;
   box-sizing: border-box;
   border: #ebebeb solid 1px;
+
   .title {
     @media only screen and (max-width: 799px) {
       height: 50px;
@@ -46,10 +53,15 @@ const Contenair = styled.div`
       padding-left: 0;
       padding-bottom: 0px;
     }
+    /* border: 2px solid red; */
+    .MuiCalendarPicker-root :focus {
+      background: #f7941d;
+      color: white;
+    }
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 3rem;
+    /* padding-left: 3rem; */
     margin: 0;
   }
   .TimeContenair {
@@ -100,7 +112,7 @@ const Contenair = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    button {
+    a {
       border: 0;
       background-color: ${({ theme }) => theme.palette.colors.main};
       padding: 0.6rem 2rem;
@@ -119,8 +131,32 @@ const Contenair = styled.div`
   }
 `;
 
-const ReservationForm = ({ handleClose }) => {
+const ReservationForm = ({ close, details }) => {
+  const [restaurantId, setRestaurantId] = useState(details._id);
   const [form, setForm] = useState(false);
+  const [date, setDate] = React.useState(Date.now());
+
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(Date.now());
+  const [num, setNum] = useState(1);
+
+  const handleChangeNum = (e) => {
+    setNum(e.target.value);
+  };
+
+  const handleChange = (newValue) => {
+    // let formatedTime = Moment(newValue).format("hh:mm:ss A");
+    //
+    setValue(newValue);
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleDate = (newDate) => {
+    // let formatedDate = Moment(newDate).format("Do MMMM YYYY");
+    setDate(newDate);
+  };
 
   const fixForm = () => {
     if (window.scrollY >= 1) {
@@ -132,37 +168,41 @@ const ReservationForm = ({ handleClose }) => {
 
   useEffect(() => {
     fixForm();
-
     window.addEventListener("scroll", fixForm);
   });
   return (
     <Contenair className={form ? "formScroll" : " nothing"}>
       <div className="title">
         <h2>Réservez votre table</h2>
-        <Icon
-          icon="emojione-v1:cross-mark"
-          className="icone"
-          onClick={handleClose}
-        />
+        <Icon icon="emojione-v1:cross-mark" className="icone" onClick={close} />
       </div>
 
       <div className="calenderContenair">
-        <StaticDatePickerLandscape />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CalendarPicker onChange={handleDate} />
+        </LocalizationProvider>
       </div>
       <div className="TimeContenair">
         <div>
           <h4>Heure</h4>
         </div>
-
-        <MaterialUIPickers />
+        <MaterialUIPickers value={value} onChange={handleChange} num={num} />
       </div>
       <div className="PlaceContenair">
         <h4>Nombre de place</h4>
-        <FormPropsTextFields />
+        <FormPropsTextFields onChange={handleChangeNum} />
       </div>
       <div className="submission">
-        <button type="reset">Réserver</button>
+        <a onClick={handleOpen}>Réserver</a>
         <p>Nous ne percevons aucun frais lié à la réservation !</p>
+        <BasicModal
+          handleClose={handleClose}
+          open={open}
+          date={date}
+          time={value}
+          nbrPlaces={num}
+          restaurantId={restaurantId}
+        />
       </div>
     </Contenair>
   );

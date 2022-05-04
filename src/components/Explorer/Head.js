@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
+import Select from "react-select";
 import { useState, useEffect } from "react";
+import SearchBar from "./../shared/SearchBar";
 
 const Contenair = styled.div`
   width: 100%;
@@ -24,8 +26,24 @@ const Contenair = styled.div`
     background-color: ${({ theme }) => theme.palette.colors.white};
     padding: 5px 10px;
     border-radius: 5px;
+    .form-select {
+      border: none;
+      margin: 0px 10px;
+      border-left: 1px solid black;
+      padding: 0rem 1rem;
+      &:focus {
+        outline: none;
+      }
+      @media only screen and (max-width: 799px) {
+        padding: 0rem 0.2rem;
+        margin: 5px;
+        height: 20px;
+      }
+    }
     @media only screen and (max-width: 799px) {
       margin: 0.5rem;
+
+      align-items: center;
     }
     .icone {
       @media only screen and (max-width: 799px) {
@@ -39,7 +57,7 @@ const Contenair = styled.div`
       border: none;
       outline: none;
       @media only screen and (max-width: 799px) {
-        max-width: 12rem;
+        max-width: 9rem;
       }
     }
     button {
@@ -65,7 +83,7 @@ const Contenair = styled.div`
   }
 `;
 
-const Head = ({ handleSubmit, getInputValue }) => {
+const Head = ({ handleSubmit, getInputValue, handleChange, categories }) => {
   return (
     <Contenair>
       <div>
@@ -73,6 +91,24 @@ const Head = ({ handleSubmit, getInputValue }) => {
       </div>
       <form className="searchbar" onSubmit={handleSubmit}>
         <input onChange={getInputValue}></input>
+        <select
+          label="Sélectionnez une catégorie"
+          className="form-select"
+          onChange={handleChange}
+        >
+          <option value={categories[0]} selected>
+            catégorie
+          </option>
+          {categories.map((category) => {
+            return (
+              <>
+                <option value={category._id} key={category._id}>
+                  {category.categoryName}{" "}
+                </option>
+              </>
+            );
+          })}
+        </select>
         <button type="submit">
           <span>Rechercher</span>
           <Icon icon="bx:bx-search" className="icone" />

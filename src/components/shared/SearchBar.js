@@ -1,7 +1,11 @@
-import styled from 'styled-components';
-import { Icon } from '@iconify/react';
+import styled from "styled-components";
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import LoadingButton from "./../../components/shared/LoadingButton";
+import { useState, useEffect } from "react";
+import Router from "next/router";
 
-const Contenair = styled.div`
+const Contenair = styled.form`
   display: flex;
   align-items: center;
   width: 1029px;
@@ -15,7 +19,8 @@ const Contenair = styled.div`
     padding: 10px;
     text-align: center;
     font-size: 1.3rem;
-    font-weight: 100;
+    color: #c4c4c4;
+    font-weight: 400;
     &::placeholder {
       color: #c4c4c4;
     }
@@ -69,7 +74,10 @@ const Contenair = styled.div`
     }
 
     select {
-      display: none;
+      border-left: 1px solid black;
+      border-right: none;
+      padding: 0px 5px;
+      font-size: 1rem;
     }
     div {
       display: flex;
@@ -103,19 +111,83 @@ const Contenair = styled.div`
 `;
 
 const SearchBar = () => {
-  return (
-    <Contenair>
-      <input placeholder="Entrez le nom du restaurant"></input>
+  const [categories, setCategories] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [restaurantName, setRestaurantName] = useState("");
+  const [restaurantCategory, setRestaurantCategory] = useState("");
 
-      <select label="Sélectionnez une catégorie ">
-        <option value="">Sélectionnez une catégorie</option>
-        <option value="classic">Classic</option>
-        <option value="">pizza</option>
+  const getCategories = async () => {
+    try {
+      const url = `https://yuding.herokuapp.com/category`;
+      const response = await fetch(url);
+      const json = await response.json();
+      setCategories(json.categories);
+    } catch (error) {
+      error.message;
+    }
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setRestaurantCategory(value);
+    console.log({ value });
+  };
+  const getInputValue = (event) => {
+    const value = event.target.value;
+    setRestaurantName(value);
+  };
+
+  const handleSubmit = async (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    const url = `https://yuding.herokuapp.com/restaurants/?restaurantName=${restaurantName}&category=${restaurantCategory}`;
+    try {
+      const response = await fetch(url);
+      const jsonFile = await response.json();
+      setSearchResult(jsonFile.restaurants);
+      console.log({ searchResult });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendData = () => {
+    Router.push({
+      pathname: "/Explorer",
+      query: {
+        restaurantName,
+        restaurantCategory,
+      },
+    });
+  };
+
+  useEffect(() => {
+    getCategories();
+    handleSubmit();
+  }, [restaurantName, restaurantCategory]);
+  return (
+    <Contenair onSubmit={handleSubmit}>
+      <input
+        placeholder="Entrez le nom du restaurant"
+        onChange={getInputValue}
+      ></input>
+
+      <select label="Sélectionnez une catégorie" onChange={handleChange}>
+        {categories.map((category) => {
+          return (
+            <option value={category._id} key={category._id}>
+              {category.categoryName}
+            </option>
+          );
+        })}
       </select>
       <div>
-        <button>
-          <small>Rechercher</small> <Icon icon="bx:bx-search" className="icone" />
+        {/* <Link href="/Explorer"> */}
+        <button type="submit" onClick={sendData}>
+          <small>Rechercher</small>
+          <Icon icon="bx:bx-search" className="icone" />
         </button>
+        {/* </Link> */}
       </div>
     </Contenair>
   );

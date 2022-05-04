@@ -21,9 +21,15 @@ export const HeaderStyled = styled.header`
   height: auto;
   z-index: 2;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  padding: 10px 100px;
+  padding: 20px 100px;
   background: ${({ theme }) => theme.palette.colors.white};
+  .btn {
+    padding: 10px;
+    background: none;
 
+    border: solid 2px ${({ theme }) => theme.palette.colors.menuColor};
+    outline: none;
+  }
   @media only screen and (max-width: 799px) {
     div {
       width: 35%;
@@ -115,11 +121,17 @@ const Header = () => {
               <a>Blog</a>
             </Link>
           </li>
-          <li className={router.pathname == "/A propos" ? "active" : ""}>
-            <Link href="/A propos">
+          <li className={router.pathname == "/About" ? "active" : ""}>
+            <Link href="/About">
               <a>A propos</a>
             </Link>
           </li>
+          <li>
+            <Link href="/Signup">
+              <a className="btn">Intégrer la plateforme</a>
+            </Link>
+          </li>
+
           <div onClick={handleClick} className="arsy">
             {click ? (
               <Icon icon="maki:cross" className="menu-icon fontSizeClass" />

@@ -1,134 +1,158 @@
-import styled from 'styled-components';
-import TextField from '@mui/material/TextField';
-import NumberPicker from './../../src/components/shared/NumberPicker';
-import ResponsiveTimePickers from './../../src/components/shared/TimePick';
-import MultipleSelect from './../../src/components/shared/MultiSelect';
-import LoadingButton from './../../src/components/shared/LoadingButton';
+import styled from "styled-components";
+import TextField from "@mui/material/TextField";
+import { useForm } from "react-hook-form";
+import FormPropsTextFields from "./../../src/components/shared/NumberPicker";
+import ResponsiveTimePickers from "./../../src/components/shared/TimePick";
+import Router from "next/router";
+import { useState, useEffect } from "react";
+import TimePicker from "./../../src/components/shared/TimePicker";
+import authHeader from "./../../services/auth-header";
 
-const Container = styled.main`
-  width: 100vw;
-  height: 100vh;
+const COntainer = styled.section`
+  width: 100%;
+  height: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  .container {
-    width: 100%;
+  padding: 2rem;
+  form {
+    margin: 1rem;
+    width: 50%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    h2 {
-      font-weight: 300;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-    form {
-      width: 45rem;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      .buttonContainer {
-        .MuiLoadingButton-root {
-          background-color: #f7941d;
-        }
-        margin-top: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .input-group {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        margin: 0.5rem;
-        justify-content: space-between;
-
-        .textfield {
-          width: 48%;
-          .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-            border-color: #f7941d;
-          }
-          .MuiFormLabel-root.Mui-focused {
-            color: #212121 !important;
-          }
-        }
-      }
-    }
+  }
+  .textfield {
+    width: 45%;
+    margin: 1%;
+    height: 50px;
+    padding: 10px;
   }
 `;
-const CreationRestaurant = () => {
+
+export default function CreationRestaurant() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      const requestoptions = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: authHeader(),
+      };
+      const response = await fetch(
+        // "https://yuding.herokuapp.com/restaurants",
+        "http://127.0.0.1:3000/restaurants",
+        requestoptions
+      );
+
+      const jsonData = await response.json();
+      console.log(jsonData);
+    } catch (error) {
+      console.log("error :", error.message);
+    }
+  };
+
   return (
-    <Container>
-      <div className="container">
-        <h2>Créer votre restaurant sur la plateforme Yuding</h2>
-        <form>
-          <div className="input-group">
-            <TextField
-              id="outlined-basic"
-              label="Nom du restaurant"
-              variant="outlined"
-              className="textfield"
-            />
-            <div className="textfield">
-              <NumberPicker label="Nombre de place" className="textfield" />
-            </div>
-          </div>
-          <div className="input-group">
-            <div className="textfield">
-              <ResponsiveTimePickers className="textfield" />
-            </div>
-            <div className="textfield">
-              <ResponsiveTimePickers className="textfield" />
-            </div>
-          </div>
-          <div className="input-group">
-            <TextField
-              id="outlined-basic"
-              label="Commune"
-              variant="outlined"
-              className="textfield"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Quartier"
-              variant="outlined"
-              className="textfield"
-            />
-          </div>
-          <div className="input-group">
-            <TextField
-              id="outlined-basic"
-              label="Avenue"
-              variant="outlined"
-              className="textfield"
-            />
-            <TextField
-              type="number"
-              id="outlined-basic"
-              label="Numéro"
-              variant="outlined"
-              className="textfield"
-            />
-          </div>
-          <div className="input-group">
-            <TextField
-              id="outlined-basic"
-              label="Description"
-              variant="outlined"
-              className="textfield"
-              multiline
-              maxRows={4}
-            />
-            <div className="textfield">
-              <MultipleSelect />
-            </div>
-          </div>
-          <div className="buttonContainer">
-            <LoadingButton className="buttonConnexion" action="Créer" type="submit" />
-          </div>
-        </form>
-      </div>
-    </Container>
+    <COntainer>
+      <h2>Créez votre restaurant sur la plateforme Yuding</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          placeholder="nom du restaurant"
+          className="textfield"
+          {...register("restaurantName", { required: true })}
+        />
+        <input
+          placeholder="nombre de place"
+          className="textfield"
+          {...register("nbrPlaces", { required: true })}
+        />
+        <input
+          placeholder="heure d'ouverture"
+          className="textfield"
+          {...register("openTime", { required: true })}
+        />
+        <input
+          placeholder="heure de fermeture"
+          className="textfield"
+          {...register("closeTime", { required: true })}
+        />
+        <input
+          placeholder="commune"
+          className="textfield"
+          {...register("township", { required: true })}
+        />
+        <input
+          placeholder="quartier"
+          className="textfield"
+          {...register("quater", { required: true })}
+        />
+        <input
+          placeholder="avenue"
+          className="textfield"
+          {...register("street", { required: true })}
+        />
+        <input
+          placeholder="référence"
+          className="textfield"
+          {...register("reference", { required: true })}
+        />
+        <input
+          placeholder="numéro"
+          className="textfield"
+          {...register("number", { required: true })}
+        />
+        <input
+          placeholder="description"
+          className="textfield"
+          {...register("description", { required: true })}
+        />
+        <input
+          placeholder="catégorie"
+          className="textfield"
+          {...register("category", { required: true })}
+        />
+        <input
+          placeholder="reduction"
+          className="textfield"
+          {...register("reduction", { required: true })}
+        />
+        <input
+          placeholder="prix moyen"
+          className="textfield"
+          {...register("prixMoyen", { required: true })}
+        />
+        <input
+          placeholder="menu description"
+          className="textfield"
+          {...register("menuDescription", { required: true })}
+        />
+        <input
+          placeholder="pays"
+          className="textfield"
+          {...register("pays", { required: true })}
+        />
+        <input
+          placeholder="image"
+          className="textfield"
+          {...register("image")}
+        />
+        <input
+          placeholder="couverture"
+          className="textfield"
+          {...register("coverPicture")}
+        />
+
+        <button type="submit">Créer le restaurant</button>
+      </form>
+    </COntainer>
   );
-};
-export default CreationRestaurant;
+}

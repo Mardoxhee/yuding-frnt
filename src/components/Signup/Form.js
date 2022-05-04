@@ -1,14 +1,16 @@
-import styled from 'styled-components';
-import Image from 'next/image';
-import { Icon } from '@iconify/react';
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Link from 'next/link';
-import Box from '@mui/material/Box';
+import styled from "styled-components";
+import Image from "next/image";
+import { Icon } from "@iconify/react";
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import Link from "next/link";
+import Box from "@mui/material/Box";
+import { useForm } from "react-hook-form";
+import Router from "next/router";
 
 const Contenair = styled.div`
   width: 100%;
-  font-family: 'poppins', sans-serif;
+  font-family: "poppins", sans-serif;
   display: flex;
   justify-content: space-between;
   @media only screen and (max-width: 799px) {
@@ -27,13 +29,13 @@ const Contenair = styled.div`
     width: 400px;
 
     .advice {
-      span {
+      p {
         margin-top: 1rem;
         .icone {
           font-size: 1.5rem;
           color: #ff9a62;
         }
-        p {
+        span {
           @media only screen and (max-width: 799px) {
             width: 390px;
           }
@@ -161,87 +163,134 @@ const Contenair = styled.div`
 `;
 
 const FormSide = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      const requestoptions = {
+        method: "POST",
+        body: JSON.stringify(data),
+        // credentials: "include",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      };
+      const response = await fetch(
+        "https://yuding.herokuapp.com/accounts/signup",
+        requestoptions
+      );
+
+      const jsonData = await response.json();
+      console.log(jsonData.data);
+      console.log(jsonData.token);
+      if (jsonData.token) {
+        localStorage.setItem("user", JSON.stringify(jsonData.token));
+      }
+
+      if (response.status == 201) {
+        Router.push({
+          pathname: "http://localhost:8081/CreationRestaurant",
+        });
+      }
+      reset();
+      //   setSuccess(true);
+      //   console.log({ success });
+      //   setGgetOpened(true);
+      //   reset();
+      // } else {
+      //   setSuccess(false);
+      // }
+    } catch (error) {
+      console.log("error :", error.message);
+    }
+  };
+
   return (
     <Contenair>
       <div className="formContenair">
         <h2>Vous allez créer votre compte yuding Restaurateur</h2>
         <div className="advice">
-          <span>
-            <Icon icon="grommet-icons:validate" className="icone" />{' '}
-            <p>Publication gratuite de votre restaurant sur Yuding</p>
-          </span>
-          <span>
-            <Icon icon="ant-design:star-outlined" className="icone" />{' '}
-            <p>Assistance technique gratuite</p>
-          </span>
-          <span>
+          <p>
+            <Icon icon="grommet-icons:validate" className="icone" />{" "}
+            <span>Publication gratuite de votre restaurant sur Yuding</span>
+          </p>
+          <p>
+            <Icon icon="ant-design:star-outlined" className="icone" />{" "}
+            <span>Assistance technique gratuite</span>
+          </p>
+          <p>
+            <Icon icon="vaadin:invoice" className="icone" />{" "}
+            <span>
+              Facturation à l'utilisation : Aucun frais n’est percçu à la
+              consommation des services Yuding
+            </span>
+          </p>
+        </div>
+        <Box>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <Icon icon="vaadin:invoice" className="icone" />{' '}
+              <TextField
+                label="Votre nom"
+                variant="outlined"
+                className="textfield"
+                type="text"
+                {...register("lastName", { required: true })}
+              />
+              <TextField
+                label="Votre prénom"
+                variant="outlined"
+                className="textfield"
+                type="text"
+                {...register("firstName", { required: true })}
+              />
             </div>
-            <div>
+            <TextField
+              label="votre adresse mail"
+              variant="outlined"
+              className="textfield-email"
+              type="email"
+              {...register("email", { required: true })}
+            />
+            <TextField
+              label="votre numéro de téléphone"
+              variant="outlined"
+              className="textfield-phone"
+              type="tel"
+              {...register("phone", { required: true })}
+            />
+            <div className="passwordFieldsContenair">
+              <TextField
+                label="Créer un mot de passe"
+                variant="outlined"
+                type="password"
+                className="textfield-pass-word"
+                {...register("password", { required: true })}
+              />
+              <TextField
+                label="Confirmer le mot de passe"
+                variant="outlined"
+                type="password"
+                className="textfield-pass-word"
+                {...register("passwordConfirm", { required: true })}
+              />
+            </div>
+            <div className="checkboxContenair">
+              {/* <ControlledCheckbox /> */}
+              <input type="checkbox" className="check" />
               <p>
-                Facturation à l'utilisation : Aucun frais n’est percçu à la consommation des
-                services Yuding
+                Je souhaite créer un compte Yuding restaurateur et j'accepte
+                <span> les conditions d'utilisation</span>
               </p>
             </div>
-          </span>
-        </div>
-        <Box component="form">
-          <div>
-            <TextField
-              id="outlined-basic"
-              label="Votre nom"
-              variant="outlined"
-              className="textfield"
-              type="text"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Votre prénom"
-              variant="outlined"
-              className="textfield"
-              type="text"
-            />
-          </div>
-          <TextField
-            id="outlined-basic"
-            label="votre adresse mail"
-            variant="outlined"
-            className="textfield-email"
-            type="email"
-          />
-          <TextField
-            id="outlined-basic"
-            label="votre numéro de téléphone"
-            variant="outlined"
-            className="textfield-phone"
-            type="tel"
-          />
-          <div className="passwordFieldsContenair">
-            <TextField
-              id="password"
-              label="Créer un mot de passe"
-              variant="outlined"
-              type="password"
-              className="textfield-pass-word"
-            />
-            <TextField
-              id="password"
-              label="Confirmer le mot de passe"
-              variant="outlined"
-              type="password"
-              className="textfield-pass-word"
-            />
-          </div>
-          <div className="checkboxContenair">
-            {/* <ControlledCheckbox /> */}
-            <input type="checkbox" className="check" />
-            <p>
-              Je souhaite créer un compte Yuding restaurateur et j'accepte
-              <span> les conditions d'utilisation</span>
-            </p>
-          </div>
-          <button>Créer mon compte</button>
+            <button type="submit">Créer mon compte</button>
+          </form>
         </Box>
       </div>
       <div className="rightSide">
@@ -252,8 +301,9 @@ const FormSide = () => {
             </a>
           </Link>
           <p>
-            Cette page est destinée uniquement aux restaurateurs. Si vous voulez explorer,
-            rechercher ou vous souhaitez reserver un restaurant, <a>cliquez-ici</a>
+            Cette page est destinée uniquement aux restaurateurs. Si vous voulez
+            explorer, rechercher ou vous souhaitez reserver un restaurant,{" "}
+            <a>cliquez-ici</a>
           </p>
         </div>
         <div className="already">
