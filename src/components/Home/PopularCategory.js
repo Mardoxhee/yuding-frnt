@@ -60,7 +60,7 @@ const Popular = () => {
         {isLoading && "loading..."}
         {isError && error.message}
         {isSuccess &&
-          data.restaurants.map((restaurant) => {
+          data.restaurants.slice(0, 10).map((restaurant) => {
             return (
               <Link href={"./" + restaurant._id} key={restaurant._id}>
                 <a>

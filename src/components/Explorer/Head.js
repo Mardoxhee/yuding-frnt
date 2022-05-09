@@ -7,7 +7,7 @@ import SearchBar from "./../shared/SearchBar";
 const Contenair = styled.div`
   width: 100%;
   padding: 0% 6.5%;
-  padding-top: 5%;
+  padding-top: 7%;
   padding-bottom: 1.5%;
   display: flex;
   justify-content: space-between;

@@ -138,7 +138,7 @@ const ReservationForm = ({ close, details }) => {
 
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(Date.now());
-  const [num, setNum] = useState(1);
+  const [num, setNum] = React.useState(1);
 
   const handleChangeNum = (e) => {
     setNum(e.target.value);

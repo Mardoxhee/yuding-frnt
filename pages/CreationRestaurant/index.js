@@ -23,16 +23,110 @@ const COntainer = styled.section`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: none;
+      margin: 10px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .textfieldNative {
+    height: 3.5rem;
+    padding: 1rem;
+    border-radius: 2px;
+    border: 1px rgb(133, 133, 133) solid;
+    &:focus {
+      outline: 2px solid #f7941d;
+      border: none;
+    }
+  }
+  .textfieldIpt {
+    width: 45%;
+    margin: 1%;
+    height: 3.5rem;
+    padding: 10px;
   }
   .textfield {
     width: 45%;
     margin: 1%;
-    height: 50px;
-    padding: 10px;
+  }
+  .none {
+    display: none;
+  }
+  .radio {
+    width: 100%;
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 
 export default function CreationRestaurant() {
+  const [value, setValue] = useState(Date.now());
+  const [valueClose, setValueClose] = useState(Date.now());
+  const [categories, setCategories] = useState([]);
+  const [file, setFile] = useState("");
+  const [urlState, setUrl] = useState("");
+  // console.log("url state", urlState);
+
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const uploadImage = async () => {
+    const cloudName = "yudingplatform";
+    const data = new FormData();
+
+    console.log("in upload image");
+
+    data.append("file", file);
+    data.append("upload_preset", "yuding");
+    data.append("cloud_name", "yudingplatform");
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+    };
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "post",
+        body: data,
+        config,
+      }
+    );
+    const gotData = await response.json();
+    console.log({ response });
+    setUrl(gotData.url);
+    console.log({ urlState });
+  };
+
+  const getCategories = async () => {
+    try {
+      const url = `https://yuding.herokuapp.com/category`;
+      const response = await fetch(url);
+      const json = await response.json();
+      console.log("resonse", json);
+      setCategories(json.categories);
+    } catch (error) {
+      error.message;
+    }
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    console.log({ value });
+  };
+
+  const handleTime = (newValue) => {
+    setValue(newValue);
+    console.log({ value });
+  };
+  const handleTimeClose = (newValueClose) => {
+    setValueClose(newValueClose);
+  };
   const {
     register,
     handleSubmit,
@@ -41,8 +135,16 @@ export default function CreationRestaurant() {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   const onSubmit = async (data) => {
     try {
+      await uploadImage();
+      data.coverPicture = urlState;
+
+      console.log(data);
       const requestoptions = {
         method: "POST",
         body: JSON.stringify(data),
@@ -53,9 +155,9 @@ export default function CreationRestaurant() {
         "http://127.0.0.1:3000/restaurants",
         requestoptions
       );
-
+      console.log(data.coverPicture);
       const jsonData = await response.json();
-      console.log(jsonData);
+      console.log("json data", jsonData);
     } catch (error) {
       console.log("error :", error.message);
     }
@@ -65,92 +167,132 @@ export default function CreationRestaurant() {
     <COntainer>
       <h2>Créez votre restaurant sur la plateforme Yuding</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          placeholder="nom du restaurant"
-          className="textfield"
+        <TextField
+          type="input"
+          label="nom du restaurant"
           {...register("restaurantName", { required: true })}
+          className="textfield"
         />
         <input
+          type="number"
           placeholder="nombre de place"
-          className="textfield"
           {...register("nbrPlaces", { required: true })}
+          className="textfieldNative textfield"
         />
-        <input
-          placeholder="heure d'ouverture"
-          className="textfield"
-          {...register("openTime", { required: true })}
-        />
-        <input
-          placeholder="heure de fermeture"
-          className="textfield"
-          {...register("closeTime", { required: true })}
-        />
-        <input
-          placeholder="commune"
+        <div className="textfield">
+          <input
+            value={value}
+            className="none"
+            {...register("openTime", { required: true })}
+          />
+          <input
+            className="none"
+            value={valueClose}
+            {...register("closeTime", { required: true })}
+          />
+          <TimePicker
+            className="textfield"
+            value={value}
+            onChange={handleTime}
+            label="Heure d'ouverture"
+          />
+        </div>
+        <div className="textfield">
+          <TimePicker
+            className="textfield"
+            value={valueClose}
+            onChange={handleTimeClose}
+            label="Heure de fermeture"
+          />
+        </div>
+        <TextField
+          type="input"
+          label="commune"
           className="textfield"
           {...register("township", { required: true })}
         />
-        <input
-          placeholder="quartier"
+        <TextField
+          type="input"
+          label="quartier"
           className="textfield"
           {...register("quater", { required: true })}
         />
-        <input
-          placeholder="avenue"
+        <TextField
+          label="avenue"
           className="textfield"
           {...register("street", { required: true })}
         />
-        <input
-          placeholder="référence"
-          className="textfield"
-          {...register("reference", { required: true })}
-        />
-        <input
-          placeholder="numéro"
+        <TextField
+          type="number"
+          label="numéro"
           className="textfield"
           {...register("number", { required: true })}
         />
-        <input
-          placeholder="description"
+        <TextField
+          type="input"
+          label="description"
           className="textfield"
           {...register("description", { required: true })}
         />
-        <input
-          placeholder="catégorie"
-          className="textfield"
+        <select
+          label="Sélectionnez une catégorie"
+          onChange={handleChange}
+          className="textfieldIpt"
           {...register("category", { required: true })}
-        />
-        <input
-          placeholder="reduction"
+        >
+          {categories.map((category) => {
+            return (
+              <option value={`${category._id}`} key={category._id}>
+                {category.categoryName}
+              </option>
+            );
+          })}
+        </select>
+        <TextField
+          type="number"
+          label="reduction (évaluer la valeur en %)"
           className="textfield"
           {...register("reduction", { required: true })}
         />
-        <input
-          placeholder="prix moyen"
+        <TextField
+          label="prix minimal"
           className="textfield"
           {...register("prixMoyen", { required: true })}
         />
-        <input
-          placeholder="menu description"
+        <TextField
+          type="input"
+          label="En quelques lignes essayez de décrire votre menu"
           className="textfield"
           {...register("menuDescription", { required: true })}
         />
-        <input
-          placeholder="pays"
-          className="textfield"
+        <TextField
           {...register("pays", { required: true })}
-        />
-        <input
-          placeholder="image"
+          type="input"
+          label="pays"
           className="textfield"
-          {...register("image")}
         />
-        <input
-          placeholder="couverture"
+        {/* <TextField {...register("image")} className="textfield" /> */}
+        {/* <TextField
           className="textfield"
-          {...register("coverPicture")}
-        />
+          type="file"
+          className="none"
+          filename={urlState}
+        /> */}
+        <input
+          onChange={handleFile}
+          id="coverPicture"
+          name="coverPicture"
+          type="file"
+          fileName={urlState}
 
+        />
+        <div className="radio">
+          <a>Clique sur moi</a>
+          <p>
+            J'ai lu les termes et conditions de la plateforme yuding et
+            j'approuve
+          </p>
+        </div>
         <button type="submit">Créer le restaurant</button>
       </form>
     </COntainer>
