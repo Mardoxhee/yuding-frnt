@@ -12,8 +12,26 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import btnloading from "./../../../public/Assets/btnloading.gif";
 import CustomizedSnackbars from "./CustomizedSnackbars";
+import ModalWrapper from "./Box";
 
 const Container = styled.div`
+  @media only screen and (max-width: 799px) {
+    width: 100%;
+    height: 100%;
+    button {
+      padding: 10px 20px !important;
+      margin-top: -5px !important;
+    }
+    .modal-inpt {
+      width: 100%;
+
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .textfld {
+      width: 46% !important;
+    }
+  }
   width: 100%;
   height: 100%;
   p {
@@ -85,18 +103,6 @@ const Container = styled.div`
   }
 `;
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  border: "1px solid #F7941D",
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function BasicModal({
   handleClose,
   open,
@@ -145,6 +151,10 @@ export default function BasicModal({
         console.log({ success });
         setGgetOpened(true);
         reset();
+        setTimeout(() => {
+          setCount("Timeout called!");
+        }, 5000);
+        window.location.reload();
       } else {
         setSuccess(false);
       }
@@ -161,7 +171,7 @@ export default function BasicModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <ModalWrapper>
           <Container>
             <h2>Confirmer votre réservation</h2>
             <p>
@@ -259,7 +269,7 @@ export default function BasicModal({
               message="réservation effectuée avec succès !"
             />
           </Container>
-        </Box>
+        </ModalWrapper>
       </Modal>
     </div>
   );

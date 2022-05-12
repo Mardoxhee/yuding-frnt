@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal({ details }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,7 +35,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className="modal">
-          <ReservationForm close={handleClose} />
+          <ReservationForm close={handleClose} details={details} />
         </Box>
       </Modal>
     </div>
