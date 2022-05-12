@@ -5,9 +5,12 @@ const MenuContenair = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  flex-direction: column !important;
+  display: flex;
   @media only screen and (max-width: 799px) {
     .iZRizo {
       flex-direction: column !important;
+      display: flex;
     }
     p {
       font-size: 0.8rem;
@@ -44,7 +47,6 @@ const Menu = ({ click, handleClick }) => {
   return (
     <MenuContenair>
       <h2>Menu</h2>
-
       <h3>Entrées</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipis Lorem ipsum dolor sit
