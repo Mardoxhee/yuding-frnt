@@ -151,10 +151,6 @@ export default function BasicModal({
         console.log({ success });
         setGgetOpened(true);
         reset();
-        setTimeout(() => {
-          setCount("Timeout called!");
-        }, 5000);
-        window.location.reload();
       } else {
         setSuccess(false);
       }
