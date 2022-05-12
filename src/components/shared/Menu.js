@@ -5,13 +5,8 @@ const MenuContenair = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  flex-direction: column !important;
-  display: flex;
+
   @media only screen and (max-width: 799px) {
-    .iZRizo {
-      flex-direction: column !important;
-      display: flex;
-    }
     p {
       font-size: 0.8rem;
     }
