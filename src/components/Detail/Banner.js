@@ -14,7 +14,7 @@ const Contenair = styled.section`
       rgba(6, 10, 11, 0.7486344879748774) 100%,
       rgba(0, 0, 0, 0.2248249641653537) 100%
     ),
-    url(${({ theme }) => theme.img.images.rot});
+    url("${({ image }) => image}");
   background-size: cover;
   position: relative;
   color: ${({ theme }) => theme.palette.colors.white};
@@ -71,7 +71,7 @@ const Contenair = styled.section`
 
 const Banner = ({ details }) => {
   return (
-    <Contenair>
+    <Contenair image={details.coverPicture}>
       <div className="mainContenair">
         <div className="topSide">
           <small>8.9</small>

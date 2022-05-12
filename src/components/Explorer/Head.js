@@ -83,7 +83,7 @@ const Contenair = styled.div`
   }
 `;
 
-const Head = ({ handleSubmit, getInputValue, handleChange, categories }) => {
+const Head = ({ handleSubmit, getInputValue }) => {
   return (
     <Contenair>
       <div>
@@ -91,24 +91,7 @@ const Head = ({ handleSubmit, getInputValue, handleChange, categories }) => {
       </div>
       <form className="searchbar" onSubmit={handleSubmit}>
         <input onChange={getInputValue}></input>
-        <select
-          label="Sélectionnez une catégorie"
-          className="form-select"
-          onChange={handleChange}
-        >
-          <option value={categories[0]} selected>
-            catégorie
-          </option>
-          {categories.map((category) => {
-            return (
-              <>
-                <option value={category._id} key={category._id}>
-                  {category.categoryName}{" "}
-                </option>
-              </>
-            );
-          })}
-        </select>
+
         <button type="submit">
           <span>Rechercher</span>
           <Icon icon="bx:bx-search" className="icone" />

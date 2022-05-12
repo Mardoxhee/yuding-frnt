@@ -3,6 +3,7 @@ import Title from "./../shared/Title";
 import Card from "./../shared/LargeCard";
 import Link from "next/link";
 import { useGetRecomandedRestaurantsQuery } from "./../../../services/restaurants";
+import Skeleton from "./../shared/Skeleton";
 
 const Contenair = styled.section`
   padding: 40px 100px;
@@ -49,7 +50,7 @@ const BestOffers = () => {
         subtitle="Les restaurants les mieux cotés par la communuaté Yuding "
       />
       <CardContenair>
-        {isLoading && "loading..."}
+        {isLoading && <Skeleton />}
         {isError && error.message}
         {isSuccess &&
           data.restaurants.slice(0, 6).map((restaurant) => {

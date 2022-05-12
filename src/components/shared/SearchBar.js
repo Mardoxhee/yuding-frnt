@@ -145,7 +145,6 @@ const SearchBar = () => {
       const response = await fetch(url);
       const jsonFile = await response.json();
       setSearchResult(jsonFile.restaurants);
-      console.log({ searchResult });
     } catch (err) {
       console.log(err);
     }

@@ -39,7 +39,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({ details }) {
+export default function BasicTabs({ details, click, handleClick }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -60,7 +60,7 @@ export default function BasicTabs({ details }) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Menu />
+        <Menu handleClick={handleClick} click={click} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <p>{details.description}</p>

@@ -14,7 +14,7 @@ export default function SimpleAccordion(props) {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Catégories</Typography>
+          <Typography>Filtrer par catégorie</Typography>
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>
       </Accordion>

@@ -1,6 +1,5 @@
 import Banner from "../src/components/Detail/Banner";
 import MainBody from "../src/components/Detail/Informations";
-import { useState, useEffect } from "react";
 
 const Details = ({ details }) => {
   return (

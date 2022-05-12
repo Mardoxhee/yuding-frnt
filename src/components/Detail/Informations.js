@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BasicTabs from "../shared/InfoSwitch";
 import ReservationForm from "./../shared/ReservationForm";
 import BasicModal from "./../../components/shared/Modal";
+import { useState, useEffect } from "react";
 
 const MainContenair = styled.section`
   @media only screen and (max-width: 799px) {
@@ -57,11 +58,20 @@ const MainContenair = styled.section`
 `;
 
 const MainBody = ({ details }) => {
+  const [click, setClick] = useState(false);
+  const [meal, setMeals] = useState([]);
+  const handleClick = () => {
+    setClick(!click);
+  };
   return (
     <>
       <MainContenair>
         <div className="informations">
-          <BasicTabs details={details} />
+          <BasicTabs
+            details={details}
+            click={click}
+            handleClick={handleClick}
+          />
         </div>
         <div className="reservationForm">
           <ReservationForm details={details} />

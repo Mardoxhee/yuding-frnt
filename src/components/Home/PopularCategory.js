@@ -4,6 +4,9 @@ import Card from "./../shared/Card";
 import Link from "next/link";
 import Image from "next/image";
 import { useGetRestaurantsQuery } from "../../../services/restaurants";
+import Skeleton from "./../shared/Skeleton";
+import { useState, useEffect } from "react";
+import moment from "moment";
 
 const Contenair = styled.section`
   width: 100%;
@@ -37,7 +40,6 @@ const CardContenair = styled.div`
   height: auto;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start !important;
   justify-content: space-between;
 
   @media only screen and (max-width: 799px) {
@@ -50,6 +52,7 @@ const CardContenair = styled.div`
 const Popular = () => {
   const { data, error, isLoading, isSuccess, isError } =
     useGetRestaurantsQuery();
+
   return (
     <Contenair>
       <Title
@@ -57,29 +60,11 @@ const Popular = () => {
         subtitle="Les resturants les plus fréquentés de la ville de la ville de Kinshasa "
       />
       <CardContenair>
-        {isLoading && "loading..."}
+        {isLoading && <Skeleton />}
         {isError && error.message}
         {isSuccess &&
           data.restaurants.slice(0, 10).map((restaurant) => {
-            return (
-              <Link href={"./" + restaurant._id} key={restaurant._id}>
-                <a>
-                  <Card
-                    key={restaurant.id}
-                    image={restaurant.image}
-                    category={
-                      restaurant.category
-                        ? restaurant.category.categoryName
-                        : "classic"
-                    }
-                    reduction="50"
-                    title={restaurant.restaurantName}
-                    openStatus="fermé"
-                    adress="38 Av. de la justice kin GOmbe"
-                  />
-                </a>
-              </Link>
-            );
+            return <RestaurantCard restaurant={restaurant} />;
           })}
       </CardContenair>
       <span className="more">
@@ -91,3 +76,50 @@ const Popular = () => {
   );
 };
 export default Popular;
+
+const RestaurantCard = ({ restaurant }) => {
+  const [isSameOrAfterOpenedTime, setIsSameOrAfterOpenedTime] = useState(true);
+  const [isSameOrBeforeClosedTime, setIsSameOrBeforeClosedTime] =
+    useState(true);
+
+  useEffect(() => {
+    checkRestaurantsCreneauStatus();
+  }, []);
+
+  const checkRestaurantsCreneauStatus = () => {
+    setIsSameOrAfterOpenedTime(
+      moment(Date.now()).isSameOrAfter(restaurant.openTime)
+    );
+    setIsSameOrBeforeClosedTime(
+      moment(Date.now()).isSameOrBefore(restaurant.closeTime)
+    );
+  };
+
+  return (
+    <Link href={"./" + restaurant._id} key={restaurant._id}>
+      <a>
+        <Card
+          key={restaurant._id}
+          image={restaurant.image}
+          category={
+            restaurant.category ? restaurant.category.categoryName : "classic"
+          }
+          reduction={restaurant.reduction ? "-" + restaurant.reduction : "-10"}
+          title={restaurant.restaurantName}
+          // openStatus={isSameOrAfterOpenedTime ? "ouvert" : "fermé"}
+          openStatus={
+            isSameOrAfterOpenedTime && isSameOrBeforeClosedTime
+              ? "ouvert"
+              : "fermé"
+          }
+          adress="38 Av. de la justice kin GOmbe"
+          className={
+            isSameOrAfterOpenedTime && isSameOrBeforeClosedTime
+              ? "statusOpened"
+              : "statusClosed"
+          }
+        />
+      </a>
+    </Link>
+  );
+};

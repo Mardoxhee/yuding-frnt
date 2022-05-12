@@ -7,6 +7,7 @@ import Router from "next/router";
 import { useState, useEffect } from "react";
 import TimePicker from "./../../src/components/shared/TimePicker";
 import authHeader from "./../../services/auth-header";
+import CustomizedSnackbars from "./../../src/components/shared/CustomizedSnackbars";
 
 const COntainer = styled.section`
   width: 100%;
@@ -71,7 +72,22 @@ export default function CreationRestaurant() {
   const [categories, setCategories] = useState([]);
   const [file, setFile] = useState("");
   const [urlState, setUrl] = useState("");
+  const [getOpened, setGgetOpened] = useState(false);
+  const [getOpenedError, setGgetOpenedError] = useState(false);
   // console.log("url state", urlState);
+
+  const getClosed = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setGgetOpened(false);
+  };
+  const getClosedError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setGgetOpenedError(false);
+  };
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -80,8 +96,6 @@ export default function CreationRestaurant() {
   const uploadImage = async () => {
     const cloudName = "yudingplatform";
     const data = new FormData();
-
-    console.log("in upload image");
 
     data.append("file", file);
     data.append("upload_preset", "yuding");
@@ -143,7 +157,6 @@ export default function CreationRestaurant() {
     try {
       await uploadImage();
       data.coverPicture = urlState;
-
       console.log(data);
       const requestoptions = {
         method: "POST",
@@ -151,11 +164,21 @@ export default function CreationRestaurant() {
         headers: authHeader(),
       };
       const response = await fetch(
-        // "https://yuding.herokuapp.com/restaurants",
-        "http://127.0.0.1:3000/restaurants",
+        "https://yuding.herokuapp.com/restaurants",
+        // "http://127.0.0.1:3000/restaurants",
         requestoptions
       );
-      console.log(data.coverPicture);
+      if (response.status === 201) {
+        setGgetOpened(true);
+        reset();
+        Router.push({
+          pathname: "https://google.cd",
+        });
+      }
+      if (response.status !== 201) {
+        setGgetOpenedError(true);
+      }
+
       const jsonData = await response.json();
       console.log("json data", jsonData);
     } catch (error) {
@@ -271,28 +294,31 @@ export default function CreationRestaurant() {
           label="pays"
           className="textfield"
         />
-        {/* <TextField {...register("image")} className="textfield" /> */}
-        {/* <TextField
-          className="textfield"
-          type="file"
-          className="none"
-          filename={urlState}
-        /> */}
         <input
           onChange={handleFile}
           id="coverPicture"
           name="coverPicture"
           type="file"
           fileName={urlState}
-
         />
         <div className="radio">
-          <a>Clique sur moi</a>
           <p>
             J'ai lu les termes et conditions de la plateforme yuding et
             j'approuve
           </p>
         </div>
+        <CustomizedSnackbars
+          getOpened={getOpened}
+          getClosed={getClosed}
+          severity="success"
+          message="Restaurant créé avec succès !"
+        />
+        <CustomizedSnackbars
+          getOpened={getOpenedError}
+          getClosed={getClosedError}
+          severity="error"
+          message="Veuillez reessayer, le restaurant n'a malheureusement pas été créé !"
+        />
         <button type="submit">Créer le restaurant</button>
       </form>
     </COntainer>

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import MealCard from './MealCard';
+import styled from "styled-components";
+import MealCard from "./MealCard";
 
 const MenuContenair = styled.div`
   width: 100%;
@@ -37,18 +37,21 @@ const MenuContenair = styled.div`
   }
 `;
 
-const Menu = () => {
+const Menu = ({ click, handleClick }) => {
   return (
     <MenuContenair>
       <h2>Menu</h2>
 
       <h3>Entrées</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipis Lorem ipsum dolor sit amet, consectetur
-        adipisLorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consectetur
+        Lorem ipsum dolor sit amet, consectetur adipis Lorem ipsum dolor sit
+        amet, consectetur adipisLorem ipsum dolor sit amet, consectetur
+        adipisLorem ipsum dolor sit amet, consectetur
       </p>
       <div className="entreeMealContenair">
         <MealCard
+          click={click}
+          handleClick={handleClick}
           title="Mexican Enchiladas"
           subtitle="Fuisset mentitum deleniti sit ea"
           price="36"
@@ -58,7 +61,11 @@ const Menu = () => {
           subtitle="Fuisset mentitum deleniti sit ea"
           price="36"
         />
-        <MealCard title="fufu madsu" subtitle="damaze préfére des kinois" price="01" />
+        <MealCard
+          title="fufu madsu"
+          subtitle="damaze préfére des kinois"
+          price="01"
+        />
       </div>
       <a>voir plus</a>
 

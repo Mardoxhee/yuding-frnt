@@ -11,12 +11,27 @@ const Contenair = styled.div`
     text-decoration: none;
   }
 
-  .status {
+  .unknown {
+    display: none !important;
+  }
+  .statusClosed {
     display: flex;
     border-radius: 3px;
     justify-content: center;
     color: ${({ theme }) => theme.palette.colors.red};
     border: ${({ theme }) => theme.palette.colors.red} solid 2px;
+    align-items: center;
+    text-align: center;
+    width: 30%;
+    margin-top: 8px;
+    font-size: 0.8rem;
+  }
+  .statusOpened {
+    display: flex;
+    border-radius: 3px;
+    justify-content: center;
+    color: green;
+    border: green solid 2px;
     align-items: center;
     text-align: center;
     width: 30%;
@@ -73,7 +88,15 @@ const Contenair = styled.div`
   }
 `;
 
-const Card = ({ category, reduction, title, openStatus, adress, image }) => {
+const Card = ({
+  category,
+  reduction,
+  title,
+  openStatus,
+  adress,
+  image,
+  className,
+}) => {
   return (
     <Contenair image={image}>
       <div className="mainCard">
@@ -86,7 +109,7 @@ const Card = ({ category, reduction, title, openStatus, adress, image }) => {
           <span>{adress}</span>
         </div>
       </div>
-      <div className="status">{openStatus}</div>
+      <div className={className}>{openStatus}</div>
     </Contenair>
   );
 };

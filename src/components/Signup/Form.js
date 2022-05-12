@@ -303,7 +303,9 @@ const FormSide = () => {
           <p>
             Cette page est destinée uniquement aux restaurateurs. Si vous voulez
             explorer, rechercher ou vous souhaitez reserver un restaurant,{" "}
-            <a>cliquez-ici</a>
+            <Link href="/Explorer">
+              <a>cliquez-ici</a>
+            </Link>
           </p>
         </div>
         <div className="already">

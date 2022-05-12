@@ -21,7 +21,7 @@ export const HeaderStyled = styled.header`
   height: auto;
   z-index: 2;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  padding: 20px 100px;
+  padding: 13px 100px;
   background: ${({ theme }) => theme.palette.colors.white};
   .btn {
     padding: 10px;
@@ -84,7 +84,7 @@ export const Menu = styled.ul`
 `;
 
 export const Logo = styled.div`
-  width: 150px;
+  width: 130px;
   height: 40px;
 `;
 

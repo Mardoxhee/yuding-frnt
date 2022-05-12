@@ -48,20 +48,12 @@ const Form = () => {
       const jsonData = await response.json();
       console.log(jsonData);
 
-      // if (response.status == 201) {
-      //   Router.push({
-      //     pathname: "http://localhost:3001",
-      //   });
-      //   reset();
-      // }
-
-      //   setSuccess(true);
-      //   console.log({ success });
-      //   setGgetOpened(true);
-      //   reset();
-      // } else {
-      //   setSuccess(false);
-      // }
+      if (response.status == 201) {
+        Router.push({
+          pathname: "http://localhost:3001",
+        });
+        reset();
+      }
     } catch (error) {
       console.log("error :", error.message);
     }

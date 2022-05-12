@@ -252,7 +252,12 @@ export default function BasicModal({
                 </div>
               </form>
             </Box>
-            <CustomizedSnackbars getOpened={getOpened} getClosed={getClosed} />
+            <CustomizedSnackbars
+              getOpened={getOpened}
+              getClosed={getClosed}
+              severity="success"
+              message="réservation effectuée avec succès !"
+            />
           </Container>
         </Box>
       </Modal>

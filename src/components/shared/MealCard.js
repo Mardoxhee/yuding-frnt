@@ -1,7 +1,9 @@
-import styled from 'styled-components';
-import { Icon } from '@iconify/react';
-import meal from './../../../public/Assets/meal.jpg';
-import Image from 'next/image';
+import styled from "styled-components";
+import { Icon } from "@iconify/react";
+import meal from "./../../../public/Assets/meal.jpg";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+
 const Contenair = styled.div`
   @media only screen and (max-width: 799px) {
     width: 100%;
@@ -71,6 +73,13 @@ const Contenair = styled.div`
     font-size: 1.2rem;
     color: #4e4e4e;
   }
+  .plusIcone {
+    color: ${({ theme }) => theme.palette.colors.main} !important;
+    transition: all 700ms ease;
+    &:focus {
+      transition: all 500ms ease;
+    }
+  }
   .imgContenair {
     width: 22%;
     display: flex;
@@ -94,7 +103,7 @@ const Contenair = styled.div`
   }
 `;
 
-const MealCard = ({ title, subtitle, price }) => {
+const MealCard = ({ title, subtitle, price, click, handleClick }) => {
   return (
     <Contenair>
       <div className="imgContenair">
@@ -105,8 +114,13 @@ const MealCard = ({ title, subtitle, price }) => {
         <h4>{subtitle}</h4>
       </div>
       <div className="price">{price}$</div>
-      <button>
-        <Icon icon="akar-icons:circle-plus" className="plusIcone" />
+      <button className="plusIcone">
+        <Icon
+          onClick={handleClick}
+          icon={
+            !click ? "akar-icons:circle-plus" : "ic:baseline-horizontal-rule"
+          }
+        />
       </button>
     </Contenair>
   );

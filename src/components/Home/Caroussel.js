@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "react-alice-carousel/lib/alice-carousel.css";
 import AliceCarousel from "react-alice-carousel";
 import CategoryCard from "./../shared/CategoryCard";
+import Skeleton from "./../shared/Skeleton";
 
 const responsive = {
   0: {
@@ -38,7 +39,7 @@ const Carousel = () => {
     fetchData();
   }, []);
   if (isLoading) {
-    return "loading...";
+    return <Skeleton />;
   }
   let items = data.categories.map((category) => {
     return (
