@@ -167,7 +167,7 @@ export default function BasicModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ModalWrapper>
+        {/* <ModalWrapper>
           <Container>
             <h2>Confirmer votre réservation</h2>
             <p>
@@ -175,7 +175,7 @@ export default function BasicModal({
               {Moment(date).format("Do MMMM YYYY")} à{" "}
               {Moment(time).format("hh:mm:ss A")}
             </p>
-            <Box id="modal-modal-description" sx={{ mt: 2 }}>
+    
               <form className="modal-inpt" onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                   label="votre prenom"
@@ -257,7 +257,7 @@ export default function BasicModal({
                   </button>
                 </div>
               </form>
-            </Box>
+      
             <CustomizedSnackbars
               getOpened={getOpened}
               getClosed={getClosed}
@@ -265,7 +265,7 @@ export default function BasicModal({
               message="réservation effectuée avec succès !"
             />
           </Container>
-        </ModalWrapper>
+        </ModalWrapper> */}
       </Modal>
     </div>
   );

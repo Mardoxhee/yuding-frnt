@@ -4,7 +4,7 @@ import MealCard from "./MealCard";
 const MenuContenair = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column !important;
+ flex-direction: column;
   @media only screen and (max-width: 799px) {
     p {
       font-size: 0.8rem;
@@ -41,7 +41,6 @@ const Menu = ({ click, handleClick }) => {
   return (
     <MenuContenair>
       <h2>Menu</h2>
-
       <h3>Entrées</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipis Lorem ipsum dolor sit

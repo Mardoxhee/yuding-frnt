@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   box-shadow: 24px;
   /* box-shadow: */
   padding: 15px;
+
 `;
 
 const ModalWrapper = (props) => {
