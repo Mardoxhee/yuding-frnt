@@ -167,7 +167,7 @@ export default function BasicModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        {/* <ModalWrapper>
+        <ModalWrapper>
           <Container>
             <h2>Confirmer votre réservation</h2>
             <p>
@@ -175,89 +175,89 @@ export default function BasicModal({
               {Moment(date).format("Do MMMM YYYY")} à{" "}
               {Moment(time).format("hh:mm:ss A")}
             </p>
-    
-              <form className="modal-inpt" onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                  label="votre prenom"
-                  variant="outlined"
-                  className="textfld"
-                  type="input"
-                  {...register("prenomClient", { required: true })}
-                />
-                <TextField
-                  label="votre nom"
-                  variant="outlined"
-                  className="textfld"
-                  type="input"
-                  {...register("nomduClient", { required: true })}
-                />
-                <TextField
-                  label="Téléphone"
-                  variant="outlined"
-                  className="textfld"
-                  type="input"
-                  {...register("phoneNumber", { required: true })}
-                />
-                <TextField
-                  label="e mail"
-                  variant="outlined"
-                  className="textfld"
-                  type="input"
-                  {...register("emailClient")}
-                />
-                <TextField
-                  label="message"
-                  multiline
-                  rows={4}
-                  type="input"
-                  //   defaultValue="Laissez un message, une remarque, une précision"
-                  className="textfld area"
-                  {...register("message")}
-                />
-                <TextField
-                  variant="outlined"
-                  className="textfld d-none"
-                  type="input"
-                  value={date}
-                  {...register("date")}
-                />
-                <TextField
-                  variant="outlined"
-                  className="textfld d-none"
-                  type="input"
-                  value={time}
-                  {...register("time")}
-                />
-                <TextField
-                  variant="outlined"
-                  className="textfld d-none"
-                  type="input"
-                  value={nbrPlaces}
-                  {...register("nbrePlaces")}
-                />
-                <TextField
-                  variant="outlined"
-                  className="textfld d-none"
-                  type="input"
-                  value={restaurantId}
-                  {...register("restaurant")}
-                />
-                <div className="btn-load">
-                  <button type="submit">
-                    <span className={success ? "failed" : "sucess"}>
-                      Confirmer
-                    </span>
-                    <span className="loadingSpinner">
-                      <Image src={btnloading} className="imgSpinner" />
-                    </span>
-                    <Icon
-                      className={success ? "sucess" : "failed"}
-                      icon="healthicons:yes-outline"
-                    />
-                  </button>
-                </div>
-              </form>
-      
+
+            <form className="modal-inpt" onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                label="votre prenom"
+                variant="outlined"
+                className="textfld"
+                type="input"
+                {...register("prenomClient", { required: true })}
+              />
+              <TextField
+                label="votre nom"
+                variant="outlined"
+                className="textfld"
+                type="input"
+                {...register("nomduClient", { required: true })}
+              />
+              <TextField
+                label="Téléphone"
+                variant="outlined"
+                className="textfld"
+                type="input"
+                {...register("phoneNumber", { required: true })}
+              />
+              <TextField
+                label="e mail"
+                variant="outlined"
+                className="textfld"
+                type="input"
+                {...register("emailClient")}
+              />
+              <TextField
+                label="message"
+                multiline
+                rows={4}
+                type="input"
+                //   defaultValue="Laissez un message, une remarque, une précision"
+                className="textfld area"
+                {...register("message")}
+              />
+              <TextField
+                variant="outlined"
+                className="textfld d-none"
+                type="input"
+                value={date}
+                {...register("date")}
+              />
+              <TextField
+                variant="outlined"
+                className="textfld d-none"
+                type="input"
+                value={time}
+                {...register("time")}
+              />
+              <TextField
+                variant="outlined"
+                className="textfld d-none"
+                type="input"
+                value={nbrPlaces}
+                {...register("nbrePlaces")}
+              />
+              <TextField
+                variant="outlined"
+                className="textfld d-none"
+                type="input"
+                value={restaurantId}
+                {...register("restaurant")}
+              />
+              <div className="btn-load">
+                <button type="submit">
+                  <span className={success ? "failed" : "sucess"}>
+                    Confirmer
+                  </span>
+                  <span className="loadingSpinner">
+                    <Image src={btnloading} className="imgSpinner" />
+                  </span>
+                  <Icon
+                    className={success ? "sucess" : "failed"}
+                    icon="healthicons:yes-outline"
+                  />
+                </button>
+              </div>
+            </form>
+
             <CustomizedSnackbars
               getOpened={getOpened}
               getClosed={getClosed}
@@ -265,7 +265,7 @@ export default function BasicModal({
               message="réservation effectuée avec succès !"
             />
           </Container>
-        </ModalWrapper> */}
+        </ModalWrapper>
       </Modal>
     </div>
   );
