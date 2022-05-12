@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Image from 'next/image';
+import styled from "styled-components";
+import Image from "next/image";
 
 const Contenair = styled.div`
   margin: 10px 0px;
@@ -17,6 +17,9 @@ const Contenair = styled.div`
       width: 190px;
     }
     .textSide {
+      .prxmoyen {
+        font-size: 0.7rem;
+      }
       .country,
       .adress {
         font-size: 0.5rem;
@@ -88,7 +91,7 @@ const LargeCard = ({ country, restaurantName, adress, reduction, price }) => {
         <span className="adress">{adress}</span>
         <div>
           <p className="reduction">-{reduction}</p>
-          <p>Prix moyen : {price}$</p>
+          <p className="prxmoyen">Prix moyen : {price}$</p>
         </div>
       </div>
     </Contenair>
