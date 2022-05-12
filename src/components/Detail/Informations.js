@@ -76,7 +76,7 @@ const MainBody = ({ details }) => {
         <div className="reservationForm">
           <ReservationForm details={details} />
         </div>
-        <BasicModal />
+        <BasicModal details={details} />
       </MainContenair>
     </>
   );
