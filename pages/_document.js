@@ -1,8 +1,8 @@
-import React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheet } from "styled-components";
-import { ServerStyleSheets } from "@material-ui/styles";
-import theme from "../src/styles/ThemeConfig";
+import React from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheets } from '@material-ui/styles';
+import theme from '../styles/ThemeConfig';
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const styledComponentsSheet = new ServerStyleSheet();
@@ -12,9 +12,7 @@ class MyDocument extends Document {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            styledComponentsSheet.collectStyles(
-              materialSheets.collect(<App {...props} />)
-            ),
+            styledComponentsSheet.collectStyles(materialSheets.collect(<App {...props} />))
         });
       const initialProps = await Document.getInitialProps(ctx);
       return {
@@ -25,7 +23,7 @@ class MyDocument extends Document {
             {materialSheets.getStyleElement()}
             {styledComponentsSheet.getStyleElement()}
           </React.Fragment>
-        ),
+        )
       };
     } finally {
       styledComponentsSheet.seal();
