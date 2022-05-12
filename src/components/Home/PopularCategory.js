@@ -35,7 +35,7 @@ const Contenair = styled.section`
   }
 `;
 const CardContenair = styled.div`
-  padding: 10px 0px;
+  padding: 10px 25px;
   width: 100%;
   height: auto;
   display: flex;
