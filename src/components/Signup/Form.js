@@ -7,6 +7,7 @@ import Link from "next/link";
 import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
+import { useState, useEffect } from "react";
 
 const Contenair = styled.div`
   width: 100%;
@@ -190,13 +191,15 @@ const FormSide = () => {
       const jsonData = await response.json();
       console.log(jsonData.data);
       console.log(jsonData.token);
+
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
+        setValue(jsonData.token);
       }
 
       if (response.status == 201) {
         Router.push({
-          pathname: "http://localhost:8081/CreationRestaurant",
+          pathname: "/CreationRestaurant",
         });
       }
       reset();
