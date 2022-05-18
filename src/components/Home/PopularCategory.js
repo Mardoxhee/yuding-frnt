@@ -100,7 +100,7 @@ const RestaurantCard = ({ restaurant }) => {
       <a>
         <Card
           key={restaurant._id}
-          image={restaurant.image}
+          image={restaurant.coverPicture}
           category={
             restaurant.category ? restaurant.category.categoryName : "classic"
           }

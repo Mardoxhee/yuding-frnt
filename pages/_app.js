@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }) {
             </Provider>
           </>
         </ThemeProvider>
-      );
+      );   
   }
 }
 

@@ -1,5 +1,5 @@
-import Auth from '../../src/components/Signup/MainContenair';
-import styled from 'styled-components';
+import Auth from "../../src/components/Signup/MainContenair";
+import styled from "styled-components";
 
 const MainContenair = styled.section`
   width: 100%;

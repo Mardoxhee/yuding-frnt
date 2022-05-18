@@ -76,6 +76,17 @@ export default function CreationRestaurant() {
   const [getOpenedError, setGgetOpenedError] = useState(false);
   // console.log("url state", urlState);
 
+  //   var createHost = require("cross-domain-storage/host");
+  //   var storageHost = createHost([
+  //     {
+  //         origin: 'http://www.foo.com',
+  //         allowedMethods: ['get', 'set', 'remove'],
+  //     },
+  //     {
+  //         origin: 'http://www.bar.com',
+  //         allowedMethods: ['get'],
+  //     },
+  // ]);
   const getClosed = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -172,7 +183,7 @@ export default function CreationRestaurant() {
         setGgetOpened(true);
         reset();
         Router.push({
-          pathname: "https://google.cd",
+          pathname: "http://localhost:3009/#/restaurants",
         });
       }
       if (response.status !== 201) {
