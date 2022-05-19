@@ -15,7 +15,9 @@ const Contenair = styled.section`
       rgba(0, 0, 0, 0.2248249641653537) 100%
     ),
     url("${({ image }) => image}");
+  background-repeat: no-repeat;
   background-size: cover;
+
   position: relative;
   color: ${({ theme }) => theme.palette.colors.white};
   padding: 3rem 100px;

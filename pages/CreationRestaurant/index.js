@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import TimePicker from "./../../src/components/shared/TimePicker";
 import authHeader from "./../../services/auth-header";
 import CustomizedSnackbars from "./../../src/components/shared/CustomizedSnackbars";
+import { useRouter } from "next/router";
 
 const COntainer = styled.section`
   width: 100%;
@@ -74,19 +75,16 @@ export default function CreationRestaurant() {
   const [urlState, setUrl] = useState("");
   const [getOpened, setGgetOpened] = useState(false);
   const [getOpenedError, setGgetOpenedError] = useState(false);
-  // console.log("url state", urlState);
+  const [userInfo, setUserInfo] = useState("");
+  const router = useRouter();
 
-  //   var createHost = require("cross-domain-storage/host");
-  //   var storageHost = createHost([
-  //     {
-  //         origin: 'http://www.foo.com',
-  //         allowedMethods: ['get', 'set', 'remove'],
-  //     },
-  //     {
-  //         origin: 'http://www.bar.com',
-  //         allowedMethods: ['get'],
-  //     },
-  // ]);
+  const getuserInfo = async () => {
+    const user = localStorage.getItem("user");
+    setUserInfo(user);
+    console.log("user info", userInfo);
+    return user;
+  };
+
   const getClosed = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -162,6 +160,7 @@ export default function CreationRestaurant() {
 
   useEffect(() => {
     getCategories();
+    getuserInfo();
   }, []);
 
   const onSubmit = async (data) => {
@@ -184,6 +183,7 @@ export default function CreationRestaurant() {
         reset();
         Router.push({
           pathname: "http://localhost:3009/#/restaurants",
+          query: { userInfo },
         });
       }
       if (response.status !== 201) {

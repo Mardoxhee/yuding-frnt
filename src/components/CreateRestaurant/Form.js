@@ -50,7 +50,7 @@ const Form = () => {
 
       if (response.status == 201) {
         Router.push({
-          pathname: "http://localhost:3001",
+          pathname: "http://localhost:3009",
         });
         reset();
       }

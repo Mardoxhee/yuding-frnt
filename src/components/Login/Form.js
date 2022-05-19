@@ -100,13 +100,6 @@ const Form = () => {
         });
       }
       reset();
-      //   setSuccess(true);
-      //   console.log({ success });
-      //   setGgetOpened(true);
-      //   reset();
-      // } else {
-      //   setSuccess(false);
-      // }
     } catch (error) {
       console.log("error :", error.message);
     }
