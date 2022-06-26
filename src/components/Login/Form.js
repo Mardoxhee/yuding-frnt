@@ -6,6 +6,9 @@ import LoadingButton from "./../../components/shared/LoadingButton";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
+import CustomizedSnackbars from "./../../components/shared/CustomizedSnackbars";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const FormContenair = styled.section`
   width: 50%;
@@ -64,6 +67,13 @@ const FormContenair = styled.section`
 `;
 
 const Form = () => {
+  const [opened, setOpend] = useState(false);
+  const getClosed = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpend(false);
+  };
   const {
     register,
     handleSubmit,
@@ -71,6 +81,9 @@ const Form = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {}, []);
+
   const onSubmit = async (data) => {
     try {
       const requestoptions = {
@@ -89,15 +102,28 @@ const Form = () => {
 
       const jsonData = await response.json();
       console.log(jsonData.status);
-      console.log(jsonData.token);
+      console.log("real token", jsonData.token);
+      const userInfo = jsonData.token;
+
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
+        console.log("jsonlocal storage", localStorage.user);
       }
 
       if (response.status == 200) {
+        // setUserInfo(localStorage.getItem("user"));
+        console.log("userInfo", userInfo);
         Router.push({
-          pathname: "http://localhost:8081/Login",
+          pathname: "https://yuding-manager.vercel.app/",
+          query: { userInfo },
         });
+
+        // console.log("yeah");
+      } else if (response.status == 401) {
+        Router.push({
+          pathname: "/Login",
+        });
+        setOpend(true);
       }
       reset();
     } catch (error) {
@@ -151,6 +177,12 @@ const Form = () => {
           </Link>
         </p>
       </form>
+      <CustomizedSnackbars
+        getOpened={opened}
+        getClosed={getClosed}
+        severity="error"
+        message="nom d'utilisateur ou mot de passe incorrect"
+      />
     </FormContenair>
   );
 };

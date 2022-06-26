@@ -44,6 +44,7 @@ const Contenair = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     background: linear-gradient(
         0deg,
         rgba(3, 7, 9, 1) 0%,
@@ -60,6 +61,7 @@ const Contenair = styled.div`
       display: flex;
       justify-content: space-between;
       color: ${({ theme }) => theme.palette.colors.white};
+
       h4 {
         padding: 3px 10px;
         background-color: ${({ theme }) => theme.palette.colors.black};

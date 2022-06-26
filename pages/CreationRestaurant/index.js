@@ -4,11 +4,14 @@ import { useForm } from "react-hook-form";
 import FormPropsTextFields from "./../../src/components/shared/NumberPicker";
 import ResponsiveTimePickers from "./../../src/components/shared/TimePick";
 import Router from "next/router";
+import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
 import TimePicker from "./../../src/components/shared/TimePicker";
 import authHeader from "./../../services/auth-header";
 import CustomizedSnackbars from "./../../src/components/shared/CustomizedSnackbars";
 import { useRouter } from "next/router";
+import CircularProgress from "@mui/material/CircularProgress";
+import areIntervalsOverlappingWithOptions from "date-fns/esm/fp/areIntervalsOverlappingWithOptions/index.js";
 
 const COntainer = styled.section`
   width: 100%;
@@ -65,18 +68,36 @@ const COntainer = styled.section`
     align-items: center;
     justify-content: space-between;
   }
+  .displayed {
+    display: block;
+    margin-left: 20px;
+  }
+  .unDisplayed {
+    display: none;
+  }
+  .btnSubmit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export default function CreationRestaurant() {
-  const [value, setValue] = useState(Date.now());
-  const [valueClose, setValueClose] = useState(Date.now());
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [value, setValue] = useState(new Date());
+  const [valueClose, setValueClose] = useState(new Date());
   const [categories, setCategories] = useState([]);
   const [file, setFile] = useState("");
   const [urlState, setUrl] = useState("");
   const [getOpened, setGgetOpened] = useState(false);
   const [getOpenedError, setGgetOpenedError] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [restaurantId, setRestaurantId] = useState("");
   const router = useRouter();
+
+  const handleDisable = () => {
+    setBtnDisabled(true);
+  };
 
   const getuserInfo = async () => {
     const user = localStorage.getItem("user");
@@ -103,28 +124,7 @@ export default function CreationRestaurant() {
   };
 
   const uploadImage = async () => {
-    const cloudName = "yudingplatform";
-    const data = new FormData();
-
-    data.append("file", file);
-    data.append("upload_preset", "yuding");
-    data.append("cloud_name", "yudingplatform");
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-    };
-
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      {
-        method: "post",
-        body: data,
-        config,
-      }
-    );
-    const gotData = await response.json();
-    console.log({ response });
     setUrl(gotData.url);
-    console.log({ urlState });
   };
 
   const getCategories = async () => {
@@ -132,7 +132,6 @@ export default function CreationRestaurant() {
       const url = `https://yuding.herokuapp.com/category`;
       const response = await fetch(url);
       const json = await response.json();
-      console.log("resonse", json);
       setCategories(json.categories);
     } catch (error) {
       error.message;
@@ -144,11 +143,12 @@ export default function CreationRestaurant() {
   };
 
   const handleTime = (newValue) => {
-    setValue(newValue);
-    console.log({ value });
+    let selectedTime = new Date(newValue);
+    setValue(selectedTime.getTime());
   };
   const handleTimeClose = (newValueClose) => {
-    setValueClose(newValueClose);
+    let selectedTime = new Date(newValueClose);
+    setValueClose(selectedTime.getTime());
   };
   const {
     register,
@@ -161,13 +161,35 @@ export default function CreationRestaurant() {
   useEffect(() => {
     getCategories();
     getuserInfo();
-  }, []);
+  }, [value, valueClose]);
 
   const onSubmit = async (data) => {
     try {
-      await uploadImage();
-      data.coverPicture = urlState;
-      console.log(data);
+      handleDisable();
+      const cloudName = "yudingplatform";
+      const cloudinaryData = new FormData();
+      cloudinaryData.append("file", file);
+      cloudinaryData.append("upload_preset", "yuding");
+      cloudinaryData.append("cloud_name", "yudingplatform");
+      const config = {
+        headers: { "content-type": "multipart/form-data" },
+      };
+
+      const resp = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "post",
+          body: cloudinaryData,
+          config,
+        }
+      );
+      const gotData = await resp.json();
+
+      data.coverPicture = gotData.url;
+      console.log({ data });
+      data = { ...data, openTime: value };
+      data = { ...data, closeTime: valueClose };
+      console.log("data to send to backend", data);
       const requestoptions = {
         method: "POST",
         body: JSON.stringify(data),
@@ -178,20 +200,21 @@ export default function CreationRestaurant() {
         // "http://127.0.0.1:3000/restaurants",
         requestoptions
       );
+      const jsonData = await response.json();
+
+      console.log("restaurantId", restaurantId);
       if (response.status === 201) {
         setGgetOpened(true);
+        setRestaurantId(jsonData.newRestaurant._id);
         reset();
         Router.push({
-          pathname: "http://localhost:3009/#/restaurants",
+          pathname: "https://yuding-manager.vercel.app/",
           query: { userInfo },
         });
       }
       if (response.status !== 201) {
         setGgetOpenedError(true);
       }
-
-      const jsonData = await response.json();
-      console.log("json data", jsonData);
     } catch (error) {
       console.log("error :", error.message);
     }
@@ -214,16 +237,13 @@ export default function CreationRestaurant() {
           className="textfieldNative textfield"
         />
         <div className="textfield">
-          <input
-            value={value}
-            className="none"
-            {...register("openTime", { required: true })}
-          />
-          <input
+          {/* <input value={value} className="none" /> */}
+
+          {/* <input
             className="none"
             value={valueClose}
-            {...register("closeTime", { required: true })}
-          />
+              {...register("openTime", { required: true })}
+          /> */}
           <TimePicker
             className="textfield"
             value={value}
@@ -237,30 +257,31 @@ export default function CreationRestaurant() {
             value={valueClose}
             onChange={handleTimeClose}
             label="Heure de fermeture"
+            // {...register("closeTime", { required: true })}
           />
         </div>
         <TextField
           type="input"
           label="commune"
           className="textfield"
-          {...register("township", { required: true })}
+          {...register("adress[0].township", { required: true })}
         />
         <TextField
           type="input"
           label="quartier"
           className="textfield"
-          {...register("quater", { required: true })}
+          {...register("adress[0].quater", { required: true })}
         />
         <TextField
           label="avenue"
           className="textfield"
-          {...register("street", { required: true })}
+          {...register("adress[0].street", { required: true })}
         />
         <TextField
           type="number"
           label="numéro"
           className="textfield"
-          {...register("number", { required: true })}
+          {...register("adress[0].number", { required: true })}
         />
         <TextField
           type="input"
@@ -330,7 +351,17 @@ export default function CreationRestaurant() {
           severity="error"
           message="Veuillez reessayer, le restaurant n'a malheureusement pas été créé !"
         />
-        <button type="submit">Créer le restaurant</button>
+        <button
+          type="submit"
+          disabled={btnDisabled ? true : false}
+          className="btnSubmit"
+        >
+          Créer le restaurant
+          <CircularProgress
+            className={btnDisabled ? "displayed" : "unDisplayed"}
+          />
+          <Icon />
+        </button>
       </form>
     </COntainer>
   );

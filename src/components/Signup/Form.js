@@ -177,8 +177,6 @@ const FormSide = () => {
       const requestoptions = {
         method: "POST",
         body: JSON.stringify(data),
-        // credentials: "include",
-        // credentials: "include",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
         },
