@@ -15,7 +15,9 @@ const Contenair = styled.section`
       rgba(0, 0, 0, 0.2248249641653537) 100%
     ),
     url("${({ image }) => image}");
+  background-repeat: no-repeat;
   background-size: cover;
+
   position: relative;
   color: ${({ theme }) => theme.palette.colors.white};
   padding: 3rem 100px;
@@ -64,6 +66,15 @@ const Contenair = styled.section`
       .details {
         display: flex;
         font-weight: 300;
+        a {
+          margin-left: 15px;
+          font-weight: 100;
+
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
       }
     }
   }
@@ -84,8 +95,13 @@ const Banner = ({ details }) => {
           <h2>{details.restaurantName}</h2>
           <div className="details">
             <p>{details.pays}-</p>
-            <p>{details.adress}</p>
-            <a>Voir sur la carte</a>
+            <p>
+              {details.adress[0] ? details.adress[0].number : " "}{" "}
+              {details.adress[0] ? details.adress[0].street : " "}{" "}
+              {details.adress[0] ? details.adress[0].quater : " "}{" "}
+              {details.adress[0] ? details.adress[0].township : " "}{" "}
+            </p>
+            <a> Voir sur la carte</a>
           </div>
         </div>
       </div>

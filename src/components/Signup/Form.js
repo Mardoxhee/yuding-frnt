@@ -177,8 +177,6 @@ const FormSide = () => {
       const requestoptions = {
         method: "POST",
         body: JSON.stringify(data),
-        // credentials: "include",
-        // credentials: "include",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
         },
@@ -189,8 +187,6 @@ const FormSide = () => {
       );
 
       const jsonData = await response.json();
-      console.log(jsonData.data);
-      console.log(jsonData.token);
 
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
@@ -202,14 +198,8 @@ const FormSide = () => {
           pathname: "/CreationRestaurant",
         });
       }
+
       reset();
-      //   setSuccess(true);
-      //   console.log({ success });
-      //   setGgetOpened(true);
-      //   reset();
-      // } else {
-      //   setSuccess(false);
-      // }
     } catch (error) {
       console.log("error :", error.message);
     }

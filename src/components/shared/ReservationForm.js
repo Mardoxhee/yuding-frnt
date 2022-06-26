@@ -154,8 +154,8 @@ const ReservationForm = ({ close, details }) => {
   const handleClose = () => setOpen(false);
 
   const handleDate = (newDate) => {
-    // let formatedDate = Moment(newDate).format("Do MMMM YYYY");
     setDate(newDate);
+    console.log("date from the state", date);
   };
 
   const fixForm = () => {

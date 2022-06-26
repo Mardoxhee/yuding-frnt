@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
-import * as yup from "yup";
 import { reservationSchema } from "./../validations/reservationValidation";
 import { useForm } from "react-hook-form";
 import Moment from "moment";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Router from "next/router";
 import btnloading from "./../../../public/Assets/btnloading.gif";
 import CustomizedSnackbars from "./CustomizedSnackbars";
 import ModalWrapper from "./Box";
@@ -151,6 +151,9 @@ export default function BasicModal({
         console.log({ success });
         setGgetOpened(true);
         reset();
+        Router.push({
+          pathname: "/",
+        });
       } else {
         setSuccess(false);
       }
@@ -172,7 +175,7 @@ export default function BasicModal({
             <h2>Confirmer votre réservation</h2>
             <p>
               Vous avez opté pour {nbrPlaces} places, en date du{" "}
-              {Moment(date).format("Do MMMM YYYY")} à{" "}
+              {Moment(date).format("Do MMMM YYYY")} à
               {Moment(time).format("hh:mm:ss A")}
             </p>
 

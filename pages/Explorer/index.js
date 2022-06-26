@@ -57,6 +57,18 @@ const Explorer = ({ homePageSearchresult }) => {
     setPage(value);
   };
 
+  const getRestaurantsLength = async () => {
+    const url = `https://yuding.herokuapp.com/restaurants/length`;
+    const response = await fetch(url);
+    const responseInjason = await response.json();
+    console.log("response of nombre de restaurant", responseInjason);
+    setCount(responseInjason.numberOfRestuarants);
+    try {
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getRestaurants = async () => {
     try {
       const url = `https://yuding.herokuapp.com/restaurants/?page=${page}`;
@@ -69,13 +81,13 @@ const Explorer = ({ homePageSearchresult }) => {
       );
 
       setIsLoading(false);
-      setCount(json.numberOfRestuarants);
     } catch (error) {
       error.message;
     }
   };
 
   useEffect(() => {
+    getRestaurantsLength();
     getRestaurants();
   }, [page, params, category]);
   return (

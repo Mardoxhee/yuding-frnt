@@ -55,20 +55,11 @@ const MainBody = ({
 }) => {
   let nbrPage = 1;
   const [categories, setCategories] = useState([]);
+  const [restaurantByCategory, setRestaurantByCategory] = useState([]);
+
   const [getOpened, setGgetOpened] = useState(
     searchState.length === 0 && name ? true : false
   );
-
-  const [category, setCategory] = useState("");
-
-  const handleClick = (event) => {
-    const checked = event.target.checked;
-    if (checked == true) {
-      setCategory(category.id);
-    }
-
-    console.log({ category });
-  };
 
   const getClosed = (event, reason) => {
     if (reason === "clickaway") {
@@ -87,31 +78,33 @@ const MainBody = ({
       error.message;
     }
   };
-  const handleSubmit = async (e) => {
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    }
-    const url = `https://yuding.herokuapp.com/restaurants/?restaurantName=${restaurantName}&category=${restaurantCategory}`;
-    try {
-      const response = await fetch(url);
-      const jsonFile = await response.json();
-      setSearchResult(jsonFile.restaurants);
-      console.log({ searchResult });
-    } catch (err) {
-      console.log(err);
+
+  const handleCheckBox = async (e) => {
+    const checked = e.target.checked;
+
+    if (checked == true) {
+      const restaurantCategory = e.target.value;
+      const url = `https://yuding.herokuapp.com/restaurants/?category=${restaurantCategory}`;
+      try {
+        const response = await fetch(url);
+        const jsonFile = await response.json();
+        setRestaurantByCategory(jsonFile.restaurants);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [restaurantByCategory]);
 
   if (count / 20 < 1) {
     nbrPage = 1;
   }
-  let nombre = count % 20;
+  let nombre = count / 20;
   if (nombre > 1) {
-    nbrPage = Math.trunc(nombre);
+    nbrPage = Math.round(nombre);
   }
   return (
     <Contenair>
@@ -120,10 +113,11 @@ const MainBody = ({
           {categories.map((category) => {
             return (
               <CheckboxLabels
-                onChange={handleClick}
-                label={category.categoryName}
-                key={category._id}
                 id={category._id}
+                type="checkbox"
+                label={category.categoryName}
+                value={category._id}
+                onChange={handleCheckBox}
               />
             );
           })}
@@ -140,6 +134,10 @@ const MainBody = ({
           />
           {isloading === true ? (
             <Skeleton />
+          ) : restaurantByCategory.length !== 0 ? (
+            restaurantByCategory.map((restaurant) => {
+              return <RestaurantCard restaurant={restaurant} />;
+            })
           ) : (
             data.map((restaurant) => {
               return <RestaurantCard restaurant={restaurant} />;
@@ -147,7 +145,7 @@ const MainBody = ({
           )}
         </div>
         <Pagination
-          count={2}
+          count={5}
           className="paginate"
           onChange={handlePageChange}
         />
@@ -162,25 +160,25 @@ const RestaurantCard = ({ restaurant }) => {
   const [isSameOrBeforeClosedTime, setIsSameOrBeforeClosedTime] =
     useState(true);
 
-  useEffect(() => {
-    checkRestaurantsCreneauStatus();
-  }, []);
-
   const checkRestaurantsCreneauStatus = () => {
+    const getCurrentTime = new Date();
     setIsSameOrAfterOpenedTime(
-      moment(Date.now()).isSameOrAfter(restaurant.openTime)
+      moment(new Date()).isSameOrAfter(restaurant.openTime)
     );
     setIsSameOrBeforeClosedTime(
-      moment(Date.now()).isSameOrBefore(restaurant.closeTime)
+      moment(new Date()).isSameOrBefore(restaurant.closeTime)
     );
   };
 
+  useEffect(() => {
+    checkRestaurantsCreneauStatus();
+  }, []);
   return (
     <Link href={"./" + restaurant._id} key={restaurant._id}>
       <a>
         <Card
           key={restaurant._id}
-          image={restaurant.image}
+          image={restaurant.coverPicture}
           category={
             restaurant.category ? restaurant.category.categoryName : "classic"
           }
