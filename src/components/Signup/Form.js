@@ -190,6 +190,7 @@ const FormSide = () => {
 
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
+
       }
 
       if (response.status == 201) {
