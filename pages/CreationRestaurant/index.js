@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
-import FormPropsTextFields from "./../../src/components/shared/NumberPicker";
-import ResponsiveTimePickers from "./../../src/components/shared/TimePick";
+
 import Router from "next/router";
 import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
@@ -11,7 +10,6 @@ import authHeader from "./../../services/auth-header";
 import CustomizedSnackbars from "./../../src/components/shared/CustomizedSnackbars";
 import { useRouter } from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
-import areIntervalsOverlappingWithOptions from "date-fns/esm/fp/areIntervalsOverlappingWithOptions/index.js";
 
 const COntainer = styled.section`
   width: 100%;
