@@ -41,7 +41,7 @@ const Explorer = ({ homePageSearchresult }) => {
       e.preventDefault();
     }
 
-    const url = `https://yuding-platform.onrender.com/?restaurantName=${params}`;
+    const url = `https://yuding-platform.onrender.com/restaurants/?restaurantName=${params}`;
     try {
       const response = await fetch(url);
       const jsonFile = await response.json();
