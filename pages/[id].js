@@ -1,11 +1,14 @@
 import Banner from "../src/components/Detail/Banner";
 import MainBody from "../src/components/Detail/Informations";
+import Layout from "./../src/components/Layouts/Layout";
 
 const Details = ({ details }) => {
   return (
     <>
-      <Banner details={details} />
-      <MainBody details={details} />
+      <Layout>
+        <Banner details={details} />
+        <MainBody details={details} />
+      </Layout>
     </>
   );
 };
