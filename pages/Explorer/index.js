@@ -2,6 +2,7 @@ import MainBody from "../../src/components/Explorer/mainContent";
 import Head from "./../../src/components/Explorer/Head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Layout from "./../../src/components/Layouts/Layout";
 
 const Explorer = ({ homePageSearchresult }) => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const Explorer = ({ homePageSearchresult }) => {
       e.preventDefault();
     }
 
-    const url = `https://yuding.herokuapp.com/restaurants/?restaurantName=${params}`;
+    const url = `https://yuding-platform.onrender.com/?restaurantName=${params}`;
     try {
       const response = await fetch(url);
       const jsonFile = await response.json();
@@ -58,7 +59,7 @@ const Explorer = ({ homePageSearchresult }) => {
   };
 
   const getRestaurantsLength = async () => {
-    const url = `https://yuding.herokuapp.com/restaurants/length`;
+    const url = `https://yuding-platform.onrender.com/restaurants/length`;
     const response = await fetch(url);
     const responseInjason = await response.json();
     console.log("response of nombre de restaurant", responseInjason);
@@ -71,12 +72,12 @@ const Explorer = ({ homePageSearchresult }) => {
 
   const getRestaurants = async () => {
     try {
-      const url = `https://yuding.herokuapp.com/restaurants/?page=${page}`;
+      const url = `https://yuding-platform.onrender.com/restaurants/?page=${page}`;
       const response = await fetch(url);
       const json = await response.json();
       setRecord(
         homePageSearchresult.length === 0
-          ? json.restaurants
+          ? json.restaurants.reverse()
           : homePageSearchresult
       );
 
@@ -92,21 +93,23 @@ const Explorer = ({ homePageSearchresult }) => {
   }, [page, params, category]);
   return (
     <>
-      <Head handleSubmit={handleSubmit} getInputValue={getInputValue} />
-      <MainBody
-        name={props.restaurantName}
-        searchState={searchState}
-        data={record}
-        handlePageChange={handlePageChange}
-        isloading={isLoading}
-        count={count}
-      />
+      <Layout>
+        <Head handleSubmit={handleSubmit} getInputValue={getInputValue} />
+        <MainBody
+          name={props.restaurantName}
+          searchState={searchState}
+          data={record}
+          handlePageChange={handlePageChange}
+          isloading={isLoading}
+          count={count}
+        />
+      </Layout>
     </>
   );
 };
 
 export async function getServerSideProps({ query }) {
-  const url = `https://yuding.herokuapp.com/restaurants/?restaurantName=${query.restaurantName}`;
+  const url = `https://yuding-platform.onrender.com/restaurants/?restaurantName=${query.restaurantName}`;
   const response = await fetch(url);
   const json = await response.json();
 

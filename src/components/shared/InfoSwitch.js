@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Menu from "./Menu";
+import InfoDetails from "./../Detail/InformationsDetails";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,7 +64,7 @@ export default function BasicTabs({ details, click, handleClick }) {
         <Menu handleClick={handleClick} click={click} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <p>{details.description}</p>
+        <InfoDetails details={details} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         AVIS

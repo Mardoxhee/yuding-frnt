@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { Icon } from '@iconify/react';
-import Image from 'next/image';
-import phone from './../../../public/Assets/phone.png';
+import styled from "styled-components";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
+import phone from "./../../../public/Assets/phone.png";
 
 const Contenair = styled.section`
   width: 100%;
@@ -10,6 +10,23 @@ const Contenair = styled.section`
   background-color: ${({ theme }) => theme.palette.colors.mobilebcg};
   display: flex;
   justify-content: space-between;
+  @media only screen and (min-width: 768px) and (max-width: 900px) {
+    flex-direction: row !important;
+    .textSide {
+      width: 48%;
+    }
+    .imgContenair {
+      margin: 0 !important;
+      width: 48%;
+      height: 380px;
+      box-sizing: border-box !important;
+    }
+
+    .imgContenair img {
+      height: 10% !important;
+      max-width: 50% !important;
+    }
+  }
   .text {
     width: 500px;
     color: ${({ theme }) => theme.palette.colors.text};
@@ -17,7 +34,12 @@ const Contenair = styled.section`
   .imgContenair {
     height: 500px;
     width: 300px;
-    box-sizing: border-box;
+    box-sizing: content-box;
+  }
+  .imgContenair > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    display: none;
   }
   .textSide {
     display: flex;
@@ -65,9 +87,10 @@ const Contenair = styled.section`
       width: 50%;
       box-sizing: border-box;
       margin-left: 25%;
+
       .imgContent {
-        min-width: 100% !important;
-        min-height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
       }
     }
     .textSide {
@@ -110,7 +133,9 @@ const MobileApp = () => {
   return (
     <Contenair>
       <div className="textSide">
-        <h2>Téléchargez notre application mobile pour une meilleure expérience !</h2>
+        <h2>
+          Téléchargez notre application mobile pour une meilleure expérience !
+        </h2>
         <div className="stores">
           <div>
             <Icon icon="ion:logo-google-playstore" className="icone" />
@@ -122,12 +147,17 @@ const MobileApp = () => {
           </div>
         </div>
         <p className="text">
-          Profitez pleinnement de nos services avec l’application Yuding disponible sur android et
-          IOS{' '}
+          Profitez pleinnement de nos services avec l’application Yuding
+          disponible sur android et IOS{" "}
         </p>
       </div>
       <div className="imgContenair">
-        <Image src={phone} alt="Yuding_Phone_App" className="imgContent" placeholder="blur" />
+        <Image
+          src={phone}
+          alt="Yuding_Phone_App"
+          className="imgContent"
+          placeholder="blur"
+        />
       </div>
     </Contenair>
   );

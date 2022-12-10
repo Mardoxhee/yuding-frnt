@@ -6,18 +6,21 @@ import BestOffers from "./../src/components/Home/BestOffers";
 import Banner2 from "./../src/components/Home/Banner2";
 import Testmonials from "./../src/components/Home/Testmonials";
 import MobileApp from "../src/components/Home/MobileApp";
+import Layout from "./../src/components/Layouts/Layout";
 
 const Home = () => {
   return (
     <>
-      <HomeSection />
-      <Categories />
-      <Popular />
-      <Banner />
-      <BestOffers />
-      <Banner2 />
-      <Testmonials />
-      <MobileApp />
+      <Layout>
+        <HomeSection />
+        <Categories />
+        <Popular />
+        <Banner />
+        <BestOffers />
+        <Banner2 />
+        <Testmonials />
+        <MobileApp />
+      </Layout>
     </>
   );
 };

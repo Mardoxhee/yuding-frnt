@@ -2,18 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   
- 
-
-
- 
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
     font-family:"poppins", sans-serif;
     .alice-carousel{
-    
     padding-right:-5px;
     margin-left:10px;
 

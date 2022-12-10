@@ -11,7 +11,7 @@ const Details = ({ details }) => {
 };
 
 export async function getServerSideProps({ params }) {
-  const url = `https://yuding.herokuapp.com/restaurants/${params.id}`;
+  const url = `https://yuding-platform.onrender.com/restaurants/${params.id}`;
   const response = await fetch(url);
   const json = await response.json();
   const det = json.restaurant;
