@@ -128,7 +128,7 @@ export default function CreationRestaurant() {
   const getCategories = async () => {
     try {
       // const url = `https://yuding.herokuapp.com/category`;
-      const url = `http://localhost:3000/category`;
+      const url = `https://yuding-platform.onrender.com/category`;
       const response = await fetch(url);
       const json = await response.json();
       setCategories(json.categories);
