@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const restaurantsApi = createApi({
   reducerPath: "restaurants",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://yuding.herokuapp.com",
+    baseUrl: "https://yuding-platform.onrender.com",
   }),
   endpoints: (builder) => ({
     getRestaurants: builder.query({

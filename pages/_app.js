@@ -33,13 +33,11 @@ function MyApp({ Component, pageProps }) {
               />
             </Helmet>
             <Provider store={store}>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <Component {...pageProps} />
             </Provider>
           </>
         </ThemeProvider>
-      );   
+      );
   }
 }
 

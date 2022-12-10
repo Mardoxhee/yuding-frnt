@@ -137,8 +137,8 @@ const Contenair = styled.div`
         margin-top: 1rem;
         border: 1px solid red;
         height: 100px;
-      } */
-    /* } */
+      } 
+     } */
   }
   .notice {
     @media only screen and (max-width: 799px) {
@@ -182,7 +182,7 @@ const FormSide = () => {
         },
       };
       const response = await fetch(
-        "https://yuding.herokuapp.com/accounts/signup",
+        "https://yuding-platform.onrender.com/accounts/signup",
         requestoptions
       );
 
@@ -190,7 +190,6 @@ const FormSide = () => {
 
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
-
       }
 
       if (response.status == 201) {

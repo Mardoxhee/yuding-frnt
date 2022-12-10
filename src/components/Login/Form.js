@@ -89,16 +89,14 @@ const Form = () => {
       const requestoptions = {
         method: "POST",
         body: JSON.stringify(data),
-        // credentials: "include",
-        // credentials: "include",
+
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
         },
       };
-      const response = await fetch(
-        "https://yuding.herokuapp.com/accounts/login",
-        requestoptions
-      );
+      // const url = " http://localhost:3000/accounts/login";
+      const url = "https://yuding.herokuapp.com/accounts/login";
+      const response = await fetch(url, requestoptions);
 
       const jsonData = await response.json();
       console.log(jsonData.status);
@@ -114,7 +112,8 @@ const Form = () => {
         // setUserInfo(localStorage.getItem("user"));
         console.log("userInfo", userInfo);
         Router.push({
-          pathname: "https://yuding-manager.vercel.app/",
+          // pathname: "https://yuding-manager.vercel.app/",
+          pathname: "http://localhost:8082/",
           query: { userInfo },
         });
 

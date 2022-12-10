@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Icon } from '@iconify/react';
-import CategoryNumber from './CategoryNumber';
+import styled from "styled-components";
+import { Icon } from "@iconify/react";
+import CategoryNumber from "./CategoryNumber";
 
 const Contenair = styled.div`
   display: flex;

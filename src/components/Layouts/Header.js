@@ -31,9 +31,6 @@ export const HeaderStyled = styled.header`
     outline: none;
   }
   @media only screen and (max-width: 799px) {
-    div {
-      width: 35%;
-    }
     padding: 10px 20px;
   }
 `;
@@ -84,6 +81,13 @@ export const Menu = styled.ul`
 `;
 
 export const Logo = styled.div`
+  @media only screen and (max-width: 768px) {
+    img .logoContent {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      display: none;
+    }
+  }
   width: 130px;
   height: 40px;
 `;
@@ -100,7 +104,7 @@ const Header = () => {
       <Link href="/">
         <a>
           <Logo>
-            <Image src={yudingLogo} alt="yuding_Logo" />
+            <Image src={yudingLogo} alt="yuding_Logo" className="logoContent" />
           </Logo>
         </a>
       </Link>

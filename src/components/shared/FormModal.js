@@ -140,7 +140,7 @@ export default function BasicModal({
         },
       };
       const response = await fetch(
-        "https://yuding.herokuapp.com/reservations",
+        "https://yuding-platform.onrender.com/reservations",
         requestoptions
       );
       const jsonData = await response.json();

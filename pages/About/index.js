@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Layout from "./../../src/components/Layouts/Layout";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,9 +12,11 @@ const Wrapper = styled.div`
 
 const About = () => {
   return (
-    <Wrapper>
-      <span>A propos de la plateforme yuding</span>
-    </Wrapper>
+    <Layout>
+      <Wrapper>
+        <span>A propos de la plateforme yuding</span>
+      </Wrapper>
+    </Layout>
   );
 };
 export default About;

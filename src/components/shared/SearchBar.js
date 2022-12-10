@@ -118,7 +118,7 @@ const SearchBar = () => {
 
   const getCategories = async () => {
     try {
-      const url = `https://yuding.herokuapp.com/category`;
+      const url = `https://yuding-platform.onrender.com/category`;
       const response = await fetch(url);
       const json = await response.json();
       setCategories(json.categories);
@@ -140,7 +140,7 @@ const SearchBar = () => {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-    const url = `https://yuding.herokuapp.com/restaurants/?restaurantName=${restaurantName}&category=${restaurantCategory}`;
+    const url = `https://yuding-platform.onrender.com/restaurants/?restaurantName=${restaurantName}&category=${restaurantCategory}`;
     try {
       const response = await fetch(url);
       const jsonFile = await response.json();
@@ -155,7 +155,7 @@ const SearchBar = () => {
       pathname: "/Explorer",
       query: {
         restaurantName,
-        restaurantCategory,
+        // restaurantCategory,
       },
     });
   };

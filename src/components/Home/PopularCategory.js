@@ -29,13 +29,13 @@ const Contenair = styled.section`
   }
 
   @media only screen and (max-width: 799px) {
-    padding: 40px 10px;
+    padding: 40px 20px;
     width: 100%;
-    align-items: center;
+    /* align-items: center; */
   }
 `;
 const CardContenair = styled.div`
-  padding: 10px 25px;
+  padding: 10px 20px;
   width: 100%;
   height: auto;
   display: flex;
@@ -46,6 +46,12 @@ const CardContenair = styled.div`
     display: flex;
     flex-direction: column;
     height: auto;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 900px) {
+    flex-direction: row;
+    /* a {
+      width: 50%;
+    } */
   }
 `;
 

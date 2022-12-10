@@ -127,7 +127,8 @@ export default function CreationRestaurant() {
 
   const getCategories = async () => {
     try {
-      const url = `https://yuding.herokuapp.com/category`;
+      // const url = `https://yuding.herokuapp.com/category`;
+      const url = `http://localhost:3000/category`;
       const response = await fetch(url);
       const json = await response.json();
       setCategories(json.categories);
@@ -194,8 +195,7 @@ export default function CreationRestaurant() {
         headers: authHeader(),
       };
       const response = await fetch(
-        "https://yuding.herokuapp.com/restaurants",
-        // "http://127.0.0.1:3000/restaurants",
+        "https://yuding-platform.onrender.com/restaurants",
         requestoptions
       );
       const jsonData = await response.json();
@@ -207,6 +207,7 @@ export default function CreationRestaurant() {
         reset();
         Router.push({
           pathname: "https://yuding-manager.vercel.app/",
+          // pathname: "http://localhost:8082/",
           query: { userInfo },
         });
       }

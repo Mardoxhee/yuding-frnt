@@ -22,7 +22,7 @@ const Carousel = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const url = "https://yuding.herokuapp.com/category";
+  const url = "https://yuding-platform.onrender.com/category";
   const fetchData = async () => {
     try {
       const response = await fetch(url);
@@ -41,6 +41,7 @@ const Carousel = () => {
   if (isLoading) {
     return <Skeleton />;
   }
+  console.log("check", data);
   let items = data.categories.map((category) => {
     return (
       <CategoryCard
