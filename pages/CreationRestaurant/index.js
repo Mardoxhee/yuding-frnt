@@ -206,7 +206,7 @@ export default function CreationRestaurant() {
         setRestaurantId(jsonData.newRestaurant._id);
         reset();
         Router.push({
-          pathname: "https://yuding-manager.vercel.app/",
+          pathname: "http://localhost:8082/",
           // pathname: "http://localhost:8082/",
           query: { userInfo },
         });
