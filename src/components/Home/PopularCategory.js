@@ -69,7 +69,7 @@ const Popular = () => {
         {isLoading && <Skeleton />}
         {isError && error.message}
         {isSuccess &&
-          data.restaurants.slice(0, 10).map((restaurant) => {
+          data.restaurants.slice(0, 12).map((restaurant) => {
             return <RestaurantCard restaurant={restaurant} />;
           })}
       </CardContenair>
