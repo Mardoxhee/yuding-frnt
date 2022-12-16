@@ -95,7 +95,7 @@ const Form = () => {
         },
       };
       // const url = " http://localhost:3000/accounts/login";
-      const url = "https://yuding.herokuapp.com/accounts/login";
+      const url = "https://yuding-platform.onrender.com/accounts/login";
       const response = await fetch(url, requestoptions);
 
       const jsonData = await response.json();
@@ -105,7 +105,6 @@ const Form = () => {
 
       if (jsonData.token) {
         localStorage.setItem("user", JSON.stringify(jsonData.token));
-        console.log("jsonlocal storage", localStorage.user);
       }
 
       if (response.status == 200) {
